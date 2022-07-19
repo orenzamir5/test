@@ -29,18 +29,11 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
         
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
-      
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-secret-key-id: ${{ secret.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secret.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       # EKS Login
