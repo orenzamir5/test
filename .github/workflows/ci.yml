@@ -45,11 +45,13 @@ jobs:
           else
             echo "::set-output name=slack_message::file exists"
           fi
+          sleep 5
           echo "second: $SECONDS"
     
       - name: slack message
         run: |
            echo "slack message - ${{ steps.file_exists.outputs.slack_message }}"
+           sleep 2
            echo "second: $SECONDS"
 
       # EKS Login
