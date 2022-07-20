@@ -63,6 +63,7 @@ jobs:
           channel-id: 'test'
           #slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
           slack-message: "${{ steps.file_exists.outputs.slack_message }}"
+          color: "red"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
