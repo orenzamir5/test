@@ -53,5 +53,8 @@ jobs:
       # EKS Login
 #       - name: EKS Login
 #         run: |
+            ls -al
+            exit 1
 #           aws eks --region us-east-1 update-kubeconfig --name test-cluster
 #           kubectl get ns
+
