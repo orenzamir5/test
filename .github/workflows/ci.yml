@@ -37,18 +37,18 @@ jobs:
           aws-region: us-east-1
 
       - name: check if file exists
-        id: check_if_file_exists
+        id: file_exists
         run: | 
           x=$(ls -la bla | wc -l)
           if [ $x == 0]; then
-            echo "::set-output name=slack_message::'job failed'" 
+            echo "::set-output name=message::failed" 
           else
-            echo "::set-output name=slack_message::'job seccess'"
+            echo "::set-output name=message::success"
           fi
     
       - name: slack message
         run: |
-           echo "slack message - ${{ steps.check_if_file_exists.outputs.slack_message" }}
+           echo "slack message - ${{ steps.file_exists.outputs.message }}"
 
 
       # EKS Login
