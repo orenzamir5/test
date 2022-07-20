@@ -41,9 +41,9 @@ jobs:
         run: | 
           x=$(ls -la bla | wc -l)
           if [ $x == 0]; then
-            echo "::set-output name=slack_message::job failed" 
+            echo "::set-output name=slack_message::'job failed'" 
           else
-            echo "::set-output name=slack_message::job seccess"
+            echo "::set-output name=slack_message::'job seccess'"
           fi
     
       - name: slack message
