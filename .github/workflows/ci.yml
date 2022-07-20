@@ -36,8 +36,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: check if file exists
+        id: check_if_file_exists
+        run: | 
+          x=$(ls -la bla | wc -l)
+          if [ $x == 0]; then
+            echo "::set-output name=slack_message::job failed" 
+          else
+            echo "::set-output name=slack_message::job seccess"
+          fi
+    
+      - name: slack message
+        run: echo "slack message - ${{ steps.check_if_file_exists.outputs.slack_message" }}
+
+
       # EKS Login
-      - name: EKS Login
-        run: |
-          aws eks --region us-east-1 update-kubeconfig --name test-cluster
-          kubectl get ns
+#       - name: EKS Login
+#         run: |
+#           aws eks --region us-east-1 update-kubeconfig --name test-cluster
+#           kubectl get ns
