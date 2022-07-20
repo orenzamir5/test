@@ -47,7 +47,8 @@ jobs:
           fi
     
       - name: slack message
-        run: echo "slack message - ${{ steps.check_if_file_exists.outputs.slack_message" }}
+        run: |
+           echo "slack message - ${{ steps.check_if_file_exists.outputs.slack_message" }}
 
 
       # EKS Login
