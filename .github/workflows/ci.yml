@@ -45,6 +45,7 @@ jobs:
           else
             echo "::set-output name=slack_message::file exists"
           fi
+          exit 1
     
       - name: slack message
         run: echo "slack message - ${{ steps.file_exists.outputs.slack_message }}"
@@ -53,8 +54,8 @@ jobs:
       # EKS Login
 #       - name: EKS Login
 #         run: |
-            ls -al
-            exit 1
+#            ls -al
+#            exit 1
 #           aws eks --region us-east-1 update-kubeconfig --name test-cluster
 #           kubectl get ns
 
