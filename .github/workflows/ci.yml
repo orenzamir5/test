@@ -47,6 +47,7 @@ jobs:
           fi
           sleep 5
           echo "second: $SECONDS"
+          jq -n --arg appname "$appname" '{apps: [ {name: $appname, script: "./cms/bin/www", watch: false}]}' > ./payload-slack-content
     
       - name: slack message
         run: |
@@ -54,19 +55,28 @@ jobs:
            sleep 2
            echo "second: $SECONDS"
 
-      - name: Post to a Slack channel
+#       - name: Post to a Slack channel
+#         id: slack
+#         uses: slackapi/slack-github-action@v1.19.0
+#         with:
+#           # Slack channel id, channel name, or user id to post message.
+#           # See also: https://api.slack.com/methods/chat.postMessage#channels
+#           channel-id: 'test'
+#           #slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+#           slack-message: "${{ steps.file_exists.outputs.slack_message }}"
+#           color: "red"
+#         env:
+#           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+
+      - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.19.0
         with:
-          # Slack channel id, channel name, or user id to post message.
-          # See also: https://api.slack.com/methods/chat.postMessage#channels
-          channel-id: 'test'
-          #slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-          slack-message: "${{ steps.file_exists.outputs.slack_message }}"
-          color: "red"
+          payload-file-path: "./payload-slack-content.json"
         env:
+          #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
 
 
       # EKS Login
