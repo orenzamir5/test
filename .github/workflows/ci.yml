@@ -47,7 +47,7 @@ jobs:
           fi
           sleep 5
           echo "second: $SECONDS"
-          jq -n --arg appname "bla" '{apps: [ {name: bla, script: "./cms/bin/www", watch: false}]}' > ./payload-slack-content.json
+          jq -n --arg appname "bla" '{apps: [ {name: "bla", script: "./cms/bin/www", watch: false}]}' > ./payload-slack-content.json
     
       - name: slack message
         run: |
