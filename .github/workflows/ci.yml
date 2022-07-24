@@ -18,9 +18,9 @@ jobs:
 
   job1:
     name: job1
-    strategy:
-      matrix:
-         service: [build]
+    #strategy:
+    #  matrix:
+    #     service: [build]
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
