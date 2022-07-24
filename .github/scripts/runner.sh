@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo "hello runner"
-exit 1
+slack_message='works'
+return $slack_message
