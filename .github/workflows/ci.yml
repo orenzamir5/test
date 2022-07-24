@@ -30,6 +30,7 @@ jobs:
       - name: Run a one-line script
         id: job1
         run: | 
+          ls -al
           chmod +x .github/scripts/runner.sh
           .github/scripts/runner.sh
           #output_message=$(.github/scripts/runner.sh)
