@@ -90,7 +90,7 @@ jobs:
           status: FAILED
           color: danger
           #slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-          message_id: "${{ steps.job1.outputs.slack_message }}"
+          message_id: "bla"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
