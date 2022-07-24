@@ -31,8 +31,8 @@ jobs:
         id: job1
         run: | 
           chmod +x .github/scripts/runner.sh
-          slack_message=$(.github/scripts/runner.sh)
-          echo "::set-output name=slack_message::$slack_message"
+          .github/scripts/runner.sh
+          
   
   # This workflow contains a single job called "build"
   build:
