@@ -30,10 +30,8 @@ jobs:
       - name: Run a one-line script
         id: job1
         run: | 
-          #chmod +x .github/scripts/runner.sh
-          #output_message=$(.github/scripts/runner.sh)
-          #echo "output_message: $output_message"
-          output_message='bla'
+          chmod +x .github/scripts/runner.sh
+          output_message=$(.github/scripts/runner.sh)
           echo "::set-output name=slack_message::$output_message"
         
       - name: Run a one-line script
