@@ -1,4 +1,4 @@
 #!/bin/bash
 
 slack_message='works'
-echo $slack_message
+echo "::set-output name=slack_message::$slack_message"
