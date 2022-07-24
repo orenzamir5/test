@@ -32,6 +32,7 @@ jobs:
         run: | 
           chmod +x .github/scripts/runner.sh
           output_message=$(.github/scripts/runner.sh)
+          echo "output_message: $output_message"
           echo "::set-output name=slack_message::$output_message"
           
   
@@ -50,32 +51,32 @@ jobs:
       - name: Run a one-line script
         run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
         
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: us-east-1
 
-      - name: check if file exists
-        id: file_exists
-        run: | 
-          x=$(echo "bla" | grep a | wc -l)
-          if [ $x == 0 ]; then
-            echo "::set-output name=slack_message::file doesnt exists" 
-          else
-            echo "::set-output name=slack_message::file exists"
-          fi
-          sleep 5
-          echo "second: $SECONDS"
-          #jq -n --arg appname "bla" '{apps: [ {name: "bla", script: "./cms/bin/www", watch: false}]}' > ./payload-slack-content.json
-          #jq -n --arg appname "bla" '{name: $appname, script: "./cms/bin/www", watch: false}' > ./payload-slack-content.json
-          jq -n --arg appname "bla" '{"name": "app", "script": "./cms/bin/www"}' > ./payload-slack-content.json
-      - name: slack message
-        run: |
-           echo "slack message - ${{ steps.file_exists.outputs.slack_message }}"
-           sleep 2
-           echo "second: $SECONDS"
+#       - name: check if file exists
+#         id: file_exists
+#         run: | 
+#           x=$(echo "bla" | grep a | wc -l)
+#           if [ $x == 0 ]; then
+#             echo "::set-output name=slack_message::file doesnt exists" 
+#           else
+#             echo "::set-output name=slack_message::file exists"
+#           fi
+#           sleep 5
+#           echo "second: $SECONDS"
+#           #jq -n --arg appname "bla" '{apps: [ {name: "bla", script: "./cms/bin/www", watch: false}]}' > ./payload-slack-content.json
+#           #jq -n --arg appname "bla" '{name: $appname, script: "./cms/bin/www", watch: false}' > ./payload-slack-content.json
+#           jq -n --arg appname "bla" '{"name": "app", "script": "./cms/bin/www"}' > ./payload-slack-content.json
+#       - name: slack message
+#         run: |
+#            echo "slack message - ${{ steps.file_exists.outputs.slack_message }}"
+#            sleep 2
+#            echo "second: $SECONDS"
 
 #       - name: Post to a Slack channel
 #         id: slack
@@ -90,13 +91,13 @@ jobs:
 #           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 
-      - name: Send custom JSON data to Slack workflow
-        id: slack
-        uses: slackapi/slack-github-action@v1.19.0
-        with:
-          payload-file-path: "./payload-slack-content.json"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#       - name: Send custom JSON data to Slack workflow
+#         id: slack
+#         uses: slackapi/slack-github-action@v1.19.0
+#         with:
+#           payload-file-path: "./payload-slack-content.json"
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
       # EKS Login
