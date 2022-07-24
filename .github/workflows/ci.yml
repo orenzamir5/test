@@ -28,9 +28,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: chmod +x .github/scripts/runner.sh && SLACK_MESSAGE=$(.github/scripts/runner.sh)
+        id: job1
+        run: | 
+          chmod +x .github/scripts/runner.sh
+          slack_message=$(.github/scripts/runner.sh)
+          echo "::set-output name=slack_message::$slack_messsage"
   
-
   # This workflow contains a single job called "build"
   build:
     name: build
@@ -44,7 +47,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo ${{ env.SLACK_MESSAGE }}
+        run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
         
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
