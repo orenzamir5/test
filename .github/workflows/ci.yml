@@ -17,7 +17,7 @@ on:
 jobs:
 
   job1:
-    name: job1
+    #name: job1
     #strategy:
     #  matrix:
     #     service: [build]
@@ -35,22 +35,25 @@ jobs:
           #echo "output_message: $output_message"
           output_message='bla'
           echo "::set-output name=slack_message::$output_message"
+        
+      - name: Run a one-line script
+        run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
           
   
   # This workflow contains a single job called "build"
-  build:
-    name: build
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+#   build:
+#     name: build
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
+#       # Runs a single command using the runners shell
+#       - name: Run a one-line script
+#         run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
         
 #       - name: Configure AWS Credentials
 #         uses: aws-actions/configure-aws-credentials@v1
