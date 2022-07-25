@@ -30,11 +30,11 @@ jobs:
       - name: Run a one-line script
         id: job1
         run: | 
-          ls -al
-          chmod +x .github/scripts/runner.sh
-          .github/scripts/runner.sh
-          #output_message=$(.github/scripts/runner.sh)
-          #echo "::set-output name=slack_message::$output_message"
+          #ls -al
+          #chmod +x .github/scripts/runner.sh
+          #.github/scripts/runner.sh
+          output_message=$(cat .github/scripts/helm_history)
+          echo "::set-output name=slack_message::$output_message"
         
       - name: Run a one-line script
         run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
@@ -84,17 +84,18 @@ jobs:
 
       - uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
- #        status: custom
- #         fields: workflow,job,commit,repo,ref,author,took
-#          custom_payload: |
-#            {
-#              attachments: [{
-#                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-#                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-#              }]
-#            }
+          #status: ${{ job.status }}
+          #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                #text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+                text: `slack message: \n ${{ steps.job1.outputs.slack_message }}`
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always() # Pick up events even if the job fails or is canceled.
