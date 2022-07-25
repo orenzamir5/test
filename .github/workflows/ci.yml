@@ -95,7 +95,9 @@ jobs:
             {
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `slack message: \n ${{ steps.job1.outputs.slack_message }}`
+                text: `slack message: \n ${{ steps.job1.outputs.slack_message }} \n
+                  bla1 \n
+                  bla2`,
               }]
             }
         env:
