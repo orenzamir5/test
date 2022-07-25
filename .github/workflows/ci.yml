@@ -37,7 +37,7 @@ jobs:
           helm_histroy="${helm_histroy//'%'/'%25'}"
           helm_histroy="${helm_histroy//$'\n'/'%0A'}"
           helm_histroy="${helm_histroy//$'\r'/'%0D'}"
-          output_message="Error: Cluster version: 0.1.2233, Desired version: 0.1.2231 \n Helm status: deployed \n \n Helm history: \n ${helm_histroy}"
+          output_message="  Error! Cluster version: 0.1.2233, Desired version: 0.1.2231 \n Helm status: deployed \n \n Helm history: \n ${helm_histroy}"
           #output_message=$(echo -e "bla1\n bla2")
           output_message="${output_message//'%'/'%25'}"
           output_message="${output_message//$'\n'/'%0A'}"
