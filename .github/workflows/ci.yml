@@ -107,7 +107,7 @@ jobs:
                 Branch name: ${process.env.GITHUB_REF_NAME}
                 Job URL: ${process.env.AS_JOB}
                 Helm Status:
-                ${{ steps.check-helm-status.outputs.slack_message }} \n
+                ${{ steps.job1.outputs.slack_message }} \n
                 Job runtime: ${process.env.AS_TOOK}`,
               }]
             }
