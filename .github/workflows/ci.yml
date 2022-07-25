@@ -34,6 +34,9 @@ jobs:
           #chmod +x .github/scripts/runner.sh
           #.github/scripts/runner.sh
           output_message=$(echo -e "bla1\n bla2")
+          output_message="${output_message//'%'/'%25'}"
+          output_message="${output_message//$'\n'/'%0A'}"
+          output_message="${output_message//$'\r'/'%0D'}"
           echo "::set-output name=slack_message::$output_message"
         
       - name: Run a one-line script
