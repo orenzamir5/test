@@ -100,14 +100,14 @@ jobs:
             {
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `Cluster: AWS Staging
-                Commit owner: @orenz
-                Commit URL: ${process.env.AS_COMMIT}
-                Branch name: ${process.env.GITHUB_REF_NAME}
-                Job URL: ${process.env.AS_JOB}
-                Helm Status:
-                ${{ steps.job1.outputs.slack_message }}\n
-                Job runtime: ${process.env.AS_TOOK}`,
+                text: `
+            Cluster: AWS Staging
+            Commit owner: @orenz
+            Commit URL: ${process.env.AS_COMMIT}
+            Branch name: ${process.env.GITHUB_REF_NAME}
+            Job URL: ${process.env.AS_JOB}
+            Helm Status: ${{ steps.job1.outputs.slack_message }}
+            Job runtime: ${process.env.AS_TOOK}`,
               }]
             }
         env:
