@@ -33,7 +33,7 @@ jobs:
           #ls -al
           #chmod +x .github/scripts/runner.sh
           #.github/scripts/runner.sh
-          output_message=$(cat .github/scripts/helm_history)
+          output_message=$(echo -e "bla1\n bla2")
           echo "::set-output name=slack_message::$output_message"
         
       - name: Run a one-line script
