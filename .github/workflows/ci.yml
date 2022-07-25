@@ -43,9 +43,15 @@ jobs:
           output_message="${output_message//$'\n'/'%0A'}"
           output_message="${output_message//$'\r'/'%0D'}"
           echo "::set-output name=slack_message::$output_message"
+          exit 1
         
       - name: Run a one-line script
-        run: echo "slack message - ${{ steps.job1.outputs.slack_message }}"
+        id: job2
+        run: |
+          echo "slack message - ${{ steps.job1.outputs.slack_message }}"
+          output='bla
+          echo "::set-output name=job2::$output"
+          
           
   
   # This workflow contains a single job called "build"
@@ -108,7 +114,8 @@ jobs:
             Job URL: ${process.env.AS_JOB}
             Helm Status: ${{ steps.job1.outputs.slack_message }}
             
-            Job runtime: ${process.env.AS_TOOK}`,
+            Job runtime: ${process.env.AS_TOOK}
+            JOB2: ${{ steps.job2.outputs.job2 }}`,
               }]
             }
         env:
