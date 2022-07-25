@@ -37,7 +37,7 @@ jobs:
           helm_histroy="${helm_histroy//'%'/'%25'}"
           helm_histroy="${helm_histroy//$'\n'/'%0A'}"
           helm_histroy="${helm_histroy//$'\r'/'%0D'}"
-          output_message="  Error! Cluster version: 0.1.2233, Desired version: 0.1.2231 \n   Status: deployed \n \n History: \n      ${helm_histroy}"
+          output_message="Error! Cluster version: 0.1.2233, Desired version: 0.1.2231\nStatus: deployed\n\nHistory:\n${helm_histroy}"
           #output_message=$(echo -e "bla1\n bla2")
           output_message="${output_message//'%'/'%25'}"
           output_message="${output_message//$'\n'/'%0A'}"
@@ -101,13 +101,13 @@ jobs:
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `Cluster: AWS Staging
-            Commit owner: @orenz
-            Commit URL: ${process.env.AS_COMMIT}
-            Branch name: ${process.env.GITHUB_REF_NAME}
-            Job URL: ${process.env.AS_JOB}
-            Helm Status:
+              Commit owner: @orenz
+              Commit URL: ${process.env.AS_COMMIT}
+              Branch name: ${process.env.GITHUB_REF_NAME}
+              Job URL: ${process.env.AS_JOB}
+              Helm Status:
               ${{ steps.job1.outputs.slack_message }} \n
-            Job runtime: ${process.env.AS_TOOK}`,
+              Job runtime: ${process.env.AS_TOOK}`,
               }]
             }
         env:
