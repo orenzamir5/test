@@ -102,7 +102,7 @@ jobs:
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `
                 Cluster: AWS Staging
-                Commit owner: ${process.env.AS_AUTHOR}
+              Commit owner: ${process.env.AS_AUTHOR}
                 Commit URL: ${process.env.AS_COMMIT}
                 Branch name: ${process.env.GITHUB_REF_NAME}
                 Job URL: ${process.env.AS_JOB}
