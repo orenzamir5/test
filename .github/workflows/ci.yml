@@ -165,11 +165,7 @@ jobs:
               text: "AWS Cluster",
               attachments: [{
                 color: "${{ job.status }}",
-                fields: [{
-                  title: 'lower case',
-                  value: 'LOWER CASE CHECK'.toLowerCase(),
-                  short: true
-                },
+                fields: [
                 {
                   title: 'Repo',
                   value: process.env.AS_REPO,
@@ -210,8 +206,6 @@ jobs:
                   value: process.env.AS_WORKFLOW,
                   short: true
                 }],
-                title: 'BLA',
-                text: 'BLA2',
                 actions: [{
                 }]
               }]
