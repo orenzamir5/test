@@ -162,7 +162,7 @@ jobs:
           fields: workflow,job,commit,repo,ref,author,took,message,action
           custom_payload: |
             {
-              text: "Custom Field Check",
+              text: "AWS Cluster",
               attachments: [{
                 "author_name": "8398a7@action-slack",
                 fallback: 'fallback',
@@ -175,14 +175,49 @@ jobs:
                   short: true
                 },
                 {
+                  title: 'Repo',
+                  value: process.env.AS_COMMIT,
+                  short: false
+                },
+                {
                   title: 'Commit',
                   value: process.env.AS_COMMIT,
                   short: false
                 },
                 {
-                  title: 'long title1',
-                  value: 'long value1',
+                  title: 'Job',
+                  value: process.env.AS_COMMIT,
                   short: false
+                },
+                {
+                  title: 'Action',
+                  value: process.env.AS_COMMIT,
+                  short: false
+                },
+                {
+                  title: 'Message',
+                  value: process.env.AS_COMMIT,
+                  short: true
+                },
+                {
+                  title: 'Author',
+                  value: process.env.AS_COMMIT,
+                  short: true
+                },
+                {
+                  title: 'Took',
+                  value: process.env.AS_COMMIT,
+                  short: true
+                },
+                {
+                  title: 'Took',
+                  value: process.env.AS_COMMIT,
+                  short: true
+                },
+                {
+                  title: 'Workflow',
+                  value: 'long value1',
+                  short: true
                 }],
                 actions: [{
                 }]
