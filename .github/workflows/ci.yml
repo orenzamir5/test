@@ -16,11 +16,6 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  init:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
   aws:
     #name: aws
     #strategy:
@@ -78,6 +73,8 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
