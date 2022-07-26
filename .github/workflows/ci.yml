@@ -205,7 +205,13 @@ jobs:
                   title: 'Workflow',
                   value: process.env.AS_WORKFLOW,
                   short: true
-                }],
+                },
+                {
+                  title: 'Helm status',
+                  value: ${{ steps.job1.outputs.slack_message }},
+                  short: false
+                }
+                ],
                 actions: [{
                 }]
               }]
