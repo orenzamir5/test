@@ -74,6 +74,8 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.check-helm-status.outputs.azure }}
     steps:
       - uses: actions/checkout@v3
       
@@ -87,7 +89,7 @@ jobs:
   
   slack:
     runs-on: ubuntu-latest
-    needs: aws
+    needs: [aws,azure]
     steps:
       - uses: 8398a7/action-slack@v3
         if: always()
@@ -99,7 +101,8 @@ jobs:
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `
-            AWS: ${{ needs.aws.outputs.output1 }}`,
+            AWS: ${{ needs.aws.outputs.output1 }},
+            AZURE: ${{ needs.azure.outputs.output1 }}`,
               }]
             }
         env:
