@@ -210,8 +210,8 @@ jobs:
                   value: process.env.AS_WORKFLOW,
                   short: true
                 }],
-                title: 'CI Result',
-                text: 'Succeeded',
+                title: 'BLA',
+                text: 'BLA2',
                 actions: [{
                 }]
               }]
