@@ -85,7 +85,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: ${{ env.DEPLOYMENT_STATUS }}=failed && chmod +x ./runner.sh && ./runner.sh azure
+        run: DEPLOYMENT_STATUS=failed && chmod +x ./runner.sh && ./runner.sh azure
         shell: bash
         working-directory: .github/scripts
   
