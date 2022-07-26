@@ -103,19 +103,19 @@ jobs:
 
 
 
-      - name: Slack Notification
-        if: always()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: test
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_TITLE: AWS Cluster
-          SLACK_MESSAGE: "Helm Status: ${{ steps.job1.outputs.slack_message }}\nJob runtime: process.env.AS_TOOK"
-          #SLACK_USERNAME: Oren Zamir
-          SLACK_LINK_NAMES: true
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_FOOTER: Testing envs
+#       - name: Slack Notification
+#         if: always()
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_CHANNEL: test
+#           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+#           SLACK_ICON: https://github.com/rtCamp.png?size=48
+#           SLACK_TITLE: AWS Cluster
+#           SLACK_MESSAGE: "Helm Status: ${{ steps.job1.outputs.slack_message }}\nJob runtime: process.env.AS_TOOK"
+#           #SLACK_USERNAME: Oren Zamir
+#           SLACK_LINK_NAMES: true
+#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#           SLACK_FOOTER: Testing envs
 
 
 #       - uses: 8398a7/action-slack@v3
@@ -153,43 +153,43 @@ jobs:
 
 
 
-#       - uses: 8398a7/action-slack@v3
-#         if: always()
-#         with:
-#           #status: ${{ job.status }}
-#           #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-#           status: custom
-#           fields: workflow,job,commit,repo,ref,author,took,message,action
-#           custom_payload: |
-#             {
-#               text: "Custom Field Check",
-#               attachments: [{
-#                 "author_name": "8398a7@action-slack",
-#                 fallback: 'fallback',
-#                 color: 'good',
-#                 title: 'CI Result',
-#                 text: 'Succeeded',
-#                 fields: [{
-#                   title: 'lower case',
-#                   value: 'LOWER CASE CHECK'.toLowerCase(),
-#                   short: true
-#                 },
-#                 {
-#                   title: 'Commit',
-#                   value: process.env.AS_COMMIT,
-#                   short: true
-#                 },
-#                 {
-#                   title: 'long title1',
-#                   value: 'long value1',
-#                   short: false
-#                 }],
-#                 actions: [{
-#                 }]
-#               }]
-#             }
-#         env:
-#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: 8398a7/action-slack@v3
+        if: always()
+        with:
+          #status: ${{ job.status }}
+          #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took,message,action
+          custom_payload: |
+            {
+              text: "Custom Field Check",
+              attachments: [{
+                "author_name": "8398a7@action-slack",
+                fallback: 'fallback',
+                color: 'good',
+                title: 'CI Result',
+                text: 'Succeeded',
+                fields: [{
+                  title: 'lower case',
+                  value: 'LOWER CASE CHECK'.toLowerCase(),
+                  short: true
+                },
+                {
+                  title: 'Commit',
+                  value: process.env.AS_COMMIT,
+                  short: false
+                },
+                {
+                  title: 'long title1',
+                  value: 'long value1',
+                  short: false
+                }],
+                actions: [{
+                }]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
 
