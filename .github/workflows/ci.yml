@@ -96,8 +96,7 @@ jobs:
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `
-            AWS: ${{ steps.aws.outputs.aws }}`,
-            AZURE: ${{ steps.azure.outputs.azure }}`,
+            AWS:`,
               }]
             }
         env:
