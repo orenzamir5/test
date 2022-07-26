@@ -164,11 +164,7 @@ jobs:
             {
               text: "AWS Cluster",
               attachments: [{
-                "author_name": "8398a7@action-slack",
-                fallback: 'fallback',
                 color: "${{ job.status }}",
-                title: 'CI Result',
-                text: 'Succeeded',
                 fields: [{
                   title: 'lower case',
                   value: 'LOWER CASE CHECK'.toLowerCase(),
@@ -214,6 +210,8 @@ jobs:
                   value: process.env.AS_WORKFLOW,
                   short: true
                 }],
+                title: 'CI Result',
+                text: 'Succeeded',
                 actions: [{
                 }]
               }]
