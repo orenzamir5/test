@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  DEPLOYMENT_STATUS: 'success'
+  DEPLOYMENT_STATUS: success
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -105,8 +105,8 @@ jobs:
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `
             AWS: ${{ needs.aws.outputs.output1 }},
-            AZURE: ${{ needs.azure.outputs.output1 }}`,
-            DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}
+            AZURE: ${{ needs.azure.outputs.output1 }},
+            DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}`,
               }]
             }
         env:
