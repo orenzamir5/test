@@ -176,7 +176,7 @@ jobs:
                 },
                 {
                   title: 'Commit',
-                  value: ${process.env.AS_COMMIT},
+                  value: "${process.env.AS_COMMIT}",
                   short: true
                 },
                 {
