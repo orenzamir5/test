@@ -105,11 +105,12 @@ jobs:
           SLACK_CHANNEL: test
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: Post Title @orenz
-          #SLACK_USERNAME: Oren Zamir
-          SLACK_LINK_NAMES: True
+          SLACK_TITLE: AWS Cluster
+          SLACK_MESSAGE: 'Helm Status: ${{ steps.job1.outputs.slack_message }} :rocket:'
+          SLACK_USERNAME: orenz
+          SLACK_LINK_NAMES: true
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_FOOTER: Testing envs
 
 
 
