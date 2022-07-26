@@ -134,7 +134,7 @@ jobs:
           #status: ${{ job.status }}
           #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
           status: ${{ job.status }}
-          fields: workflow,job,commit,repo,ref,author,took,message
+          fields: workflow,job,commit,repo,ref,author,took,message,action,attachments
           custom_payload: |
             {
               attachments: [{
