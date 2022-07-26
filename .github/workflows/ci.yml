@@ -16,49 +16,96 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  job1:
-    #name: job1
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+  aws:
+    #name: aws
     #strategy:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        id: job1
-        run: | 
-          #ls -al
-          #chmod +x .github/scripts/runner.sh
-          #.github/scripts/runner.sh
-          helm_histroy=$(cat .github/scripts/helm_history)
-          helm_histroy="${helm_histroy//'%'/'%25'}"
-          helm_histroy="${helm_histroy//$'\n'/'%0A'}"
-          helm_histroy="${helm_histroy//$'\r'/'%0D'}"
-          output_message="""
-            Error! Cluster version: 0.1.2233, Desired version: 0.1.2231
-            Cluster status: deployed
-            History:
-            ${helm_histroy}
-          """
-          #output_message=$(echo -e "bla1\n bla2")
-          output_message="${output_message//'%'/'%25'}"
-          output_message="${output_message//$'\n'/'%0A'}"
-          output_message="${output_message//$'\r'/'%0D'}"
-          echo "::set-output name=slack_message::$output_message"
-          exit 1
+#       - name: Helm Status
+#         id: helm-status
+#         run: | 
+#           helm_histroy=$(cat .github/scripts/helm_history)
+#           helm_histroy="${helm_histroy//'%'/'%25'}"
+#           helm_histroy="${helm_histroy//$'\n'/'%0A'}"
+#           helm_histroy="${helm_histroy//$'\r'/'%0D'}"
+#           output_message="""
+#             Error! Cluster version: 0.1.2233, Desired version: 0.1.2231
+#             Cluster status: deployed
+#             History:
+#             ${helm_histroy}
+#           """
+#           #output_message=$(echo -e "bla1\n bla2")
+#           output_message="${output_message//'%'/'%25'}"
+#           output_message="${output_message//$'\n'/'%0A'}"
+#           output_message="${output_message//$'\r'/'%0D'}"
+#           echo "::set-output name=helm_status::$output_message"
+
+#       - name: Pods status
+#         id: pods-status
+#         run: |
+#           echo "slack message - ${{ steps.job1.outputs.slack_message }}"
+#           output='bla
+#           echo "::set-output name=pods_status::$output"
+      
+      # Helm status
+      - name: Check Helm Status
+        id: check-helm-status
+        run: ./check-status.sh aws
+        shell: bash
+        working-directory: .github/scripts
         
-      - name: Run a one-line script
-        id: job2
-        run: |
-          echo "slack message - ${{ steps.job1.outputs.slack_message }}"
-          output='bla
-          echo "::set-output name=job2::$output"
-          
-          
+#       # Pods status
+#       - name: Check Pods Status
+#         id: check-pods-status
+#         run: ./check-pods-status.sh
+#         shell: bash
+#         working-directory: .github/deploy-checker
+
+        
+  azure:
+    #name: aws
+    #strategy:
+    #  matrix:
+    #     service: [build]
+    runs-on: ubuntu-latest
+    steps:
+      # Helm status
+      - name: Check Helm Status
+        id: check-helm-status
+        run: ./check-status.sh azure
+        shell: bash
+        working-directory: .github/scripts
   
+  
+  slack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 8398a7/action-slack@v3
+        if: always()
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took,message,action
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `
+            AWS: ${{ steps.aws.outputs.aws_message }}`,
+            AZURE: ${{ steps.azure.outputs.azure_message }}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  
+
   # This workflow contains a single job called "build"
 #   build:
 #     name: build
@@ -153,71 +200,71 @@ jobs:
 
 
 
-      - uses: 8398a7/action-slack@v3
-        if: always()
-        with:
-          #status: ${{ job.status }}
-          #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took,message,action
-          custom_payload: |
-            {
-              text: "AWS Cluster",
-              attachments: [{
-                color: "${{ job.status }}",
-                fields: [
-                {
-                  title: 'Repo',
-                  value: process.env.AS_REPO,
-                  short: false
-                },
-                {
-                  title: 'Commit',
-                  value: process.env.AS_COMMIT,
-                  short: false
-                },
-                {
-                  title: 'Job',
-                  value: process.env.AS_JOB,
-                  short: false
-                },
-                {
-                  title: 'Action',
-                  value: process.env.AS_COMMIT,
-                  short: false
-                },
-                {
-                  title: 'Message',
-                  value: process.env.AS_MESSAGE,
-                  short: true
-                },
-                {
-                  title: 'Author',
-                  value: process.env.AS_AUTHOR,
-                  short: true
-                },
-                {
-                  title: 'Took',
-                  value: process.env.AS_TOOK,
-                  short: true
-                },
-                {
-                  title: 'Workflow',
-                  value: process.env.AS_WORKFLOW,
-                  short: true
-                },
-                {
-                  title: 'Helm status',
-                  value: steps.job1.outputs.slack_message,
-                  short: false
-                }
-                ],
-                actions: [{
-                }]
-              }]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#       - uses: 8398a7/action-slack@v3
+#         if: always()
+#         with:
+#           #status: ${{ job.status }}
+#           #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+#           status: custom
+#           fields: workflow,job,commit,repo,ref,author,took,message,action
+#           custom_payload: |
+#             {
+#               text: "AWS Cluster",
+#               attachments: [{
+#                 color: "${{ job.status }}",
+#                 fields: [
+#                 {
+#                   title: 'Repo',
+#                   value: process.env.AS_REPO,
+#                   short: false
+#                 },
+#                 {
+#                   title: 'Commit',
+#                   value: process.env.AS_COMMIT,
+#                   short: false
+#                 },
+#                 {
+#                   title: 'Job',
+#                   value: process.env.AS_JOB,
+#                   short: false
+#                 },
+#                 {
+#                   title: 'Action',
+#                   value: process.env.AS_COMMIT,
+#                   short: false
+#                 },
+#                 {
+#                   title: 'Message',
+#                   value: process.env.AS_MESSAGE,
+#                   short: true
+#                 },
+#                 {
+#                   title: 'Author',
+#                   value: process.env.AS_AUTHOR,
+#                   short: true
+#                 },
+#                 {
+#                   title: 'Took',
+#                   value: process.env.AS_TOOK,
+#                   short: true
+#                 },
+#                 {
+#                   title: 'Workflow',
+#                   value: process.env.AS_WORKFLOW,
+#                   short: true
+#                 },
+#                 {
+#                   title: 'Helm status',
+#                   value: steps.job1.outputs.slack_message,
+#                   short: false
+#                 }
+#                 ],
+#                 actions: [{
+#                 }]
+#               }]
+#             }
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
 
