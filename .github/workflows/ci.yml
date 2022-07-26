@@ -108,6 +108,7 @@ jobs:
           SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_TITLE: Post Title @orenz
           SLACK_USERNAME: Oren Zamir
+          SLACK_LINK_NAMES: true
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
