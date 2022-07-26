@@ -96,31 +96,63 @@ jobs:
 #            sleep 2
 #            echo "second: $SECONDS"
 
-      - uses: 8398a7/action-slack@v3
-        with:
-          #status: ${{ job.status }}
-          #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `
-            Cluster: AWS Staging
-            Commit owner: @orenz
-            Commit URL: ${process.env.AS_COMMIT}
-            Branch name: ${process.env.GITHUB_REF_NAME}
-            Job URL: ${process.env.AS_JOB}
-            Helm Status: ${{ steps.job1.outputs.slack_message }}
-            
-            Job runtime: ${process.env.AS_TOOK}
-            JOB2: ${{ steps.job2.outputs.job2 }}`,
-              }]
-            }
+
+
+      - name: Slack Notification
+        if: always()
+        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always() # Pick up events even if the job fails or is canceled.
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: Post Title
+          SLACK_USERNAME: orenz
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+
+
+
+
+
+
+
+
+
+
+
+#       - uses: 8398a7/action-slack@v3
+#          if: always()
+#         with:
+#           #status: ${{ job.status }}
+#           #fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+#           status: custom
+#           fields: workflow,job,commit,repo,ref,author,took
+#           custom_payload: |
+#             {
+#               attachments: [{
+#                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+#                 text: `
+#             Cluster: AWS Staging
+#             Commit owner: @orenz
+#             Commit URL: ${process.env.AS_COMMIT}
+#             Branch name: ${process.env.GITHUB_REF_NAME}
+#             Job URL: ${process.env.AS_JOB}
+#             Helm Status: ${{ steps.job1.outputs.slack_message }}
+            
+#             Job runtime: ${process.env.AS_TOOK}
+#             JOB2: ${{ steps.job2.outputs.job2 }}`,
+#               }]
+#             }
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+
+
+
+
+
+
 
                 #text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
 
