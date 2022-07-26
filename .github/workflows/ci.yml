@@ -54,7 +54,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: ls -al && ./runner.sh aws
+        run: chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
         working-directory: .github/scripts
         
@@ -78,7 +78,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: ./runner.sh azure
+        run: chmod +x ./runner.sh && ./runner.sh azure
         shell: bash
         working-directory: .github/scripts
   
