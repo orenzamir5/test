@@ -165,7 +165,6 @@ jobs:
               text: "Custom Field Check",
               attachments: [{
                 "author_name": "8398a7@action-slack",
-                "Commit": "${process.env.AS_COMMIT}",
                 fallback: 'fallback',
                 color: 'good',
                 title: 'CI Result',
@@ -176,8 +175,8 @@ jobs:
                   short: true
                 },
                 {
-                  title: 'reverse',
-                  value: 'gnirts esrever'.split('').reverse().join(''),
+                  title: 'Commit',
+                  value: '${process.env.AS_COMMIT}',
                   short: true
                 },
                 {
