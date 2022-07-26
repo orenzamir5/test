@@ -111,7 +111,7 @@ jobs:
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_TITLE: AWS Cluster
-          SLACK_MESSAGE: "Helm Status: ${{ steps.job1.outputs.slack_message }} \n Job runtime: ${process.env.AS_TOOK} :nonono:"
+          SLACK_MESSAGE: 'Helm Status: ${{ steps.job1.outputs.slack_message }}\nJob runtime: ${process.env.AS_TOOK} :nonono:'
           #SLACK_USERNAME: Oren Zamir
           SLACK_LINK_NAMES: true
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
