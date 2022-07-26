@@ -23,7 +23,7 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.check-helm-status.outputs.aws }}
+      output1: ${{ steps.check-helm-status.outputs.aws_var }}
     steps:
       - uses: actions/checkout@v3
       # Runs a single command using the runners shell
@@ -75,7 +75,7 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.check-helm-status.outputs.azure }}
+      output1: ${{ steps.check-helm-status.outputs.azure_var }}
     steps:
       - uses: actions/checkout@v3
       
