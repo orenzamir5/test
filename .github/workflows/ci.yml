@@ -166,7 +166,7 @@ jobs:
               attachments: [{
                 "author_name": "8398a7@action-slack",
                 fallback: 'fallback',
-                color: ${{ job.status }},
+                color: "${{ job.status }}",
                 title: 'CI Result',
                 text: 'Succeeded',
                 fields: [{
