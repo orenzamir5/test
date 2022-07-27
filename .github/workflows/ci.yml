@@ -26,7 +26,7 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     env:
-      GIT_RUNNER: ${{ env.GITHUB_RUN_NUMBER }}
+      GIT_RUNNER: ${{ GITHUB_RUN_NUMBER }}
     outputs:
       output1: ${{ steps.check-helm-status.outputs.aws_var }}
     steps:
