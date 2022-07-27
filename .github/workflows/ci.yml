@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
+  RUN_NUMBER: "0.1.${{ github.run_number }}"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -58,8 +58,6 @@ jobs:
       
       # Helm status
       - name: Check Helm Status
-        env:
-          RUN_NUMBER: "0.1.${{ github.run_number }}"
         id: check-helm-status
         run: chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
