@@ -102,7 +102,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' && '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
+                color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' || '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
                 text: `
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
