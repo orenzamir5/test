@@ -92,10 +92,10 @@ jobs:
   
   slack:
     runs-on: ubuntu-latest
+    if: always()
     needs: [aws,azure]
     steps:
       - uses: 8398a7/action-slack@v3
-        if: always()
         with:
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
