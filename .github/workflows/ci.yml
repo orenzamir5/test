@@ -58,6 +58,8 @@ jobs:
       
       # Helm status
       - name: Check Helm Status
+        env:
+          AWS_ACCESS_KEY_ID: blabla
         id: check-helm-status
         run: exit 1 && chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
