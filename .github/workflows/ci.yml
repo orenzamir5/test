@@ -106,7 +106,8 @@ jobs:
                 text: `
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
-            DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}`,
+            DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}
+            JOB AWS STATUS: ${{ needs.aws.outputs.status }}`,
               }]
             }
         env:
