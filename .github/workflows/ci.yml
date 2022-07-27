@@ -107,7 +107,7 @@ jobs:
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
             DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}
-            JOB AWS STATUS: ${{ job.aws.outputs.result }}`,
+            JOB AWS STATUS: ${{ job.aws.outputs.status }}`,
               }]
             }
         env:
