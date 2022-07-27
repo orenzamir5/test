@@ -85,7 +85,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: DEPLOYMENT_STATUS=failed && chmod +x ./runner.sh && ./runner.sh azure
+        run: chmod +x ./runner.sh && ./runner.sh azure
         shell: bash
         working-directory: .github/scripts
   
@@ -107,7 +107,8 @@ jobs:
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
             DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}
-            JOB AWS STATUS: ${{ needs.aws.result }}`,
+            JOB AWS STATUS: ${{ needs.aws.result }}
+            JOB AZURE STATUS: ${{ needs.azure.result }}`,
               }]
             }
         env:
