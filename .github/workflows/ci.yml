@@ -25,8 +25,6 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
-    env:
-      GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
     outputs:
       output1: ${{ steps.check-helm-status.outputs.aws_var }}
     steps:
@@ -61,7 +59,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         env:
-          AWS_ACCESS_KEY_ID: blabla
+          GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
         id: check-helm-status
         run: chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
