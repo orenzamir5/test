@@ -59,7 +59,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: chmod +x ./runner.sh && ./runner.sh aws
+        run: exit 1 && chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
         working-directory: .github/scripts
         
