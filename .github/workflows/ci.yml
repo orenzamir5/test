@@ -59,7 +59,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         env:
-          GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
+          RUN_NUMBER: "0.1.${{ github.run_number }}"
         id: check-helm-status
         run: chmod +x ./runner.sh && ./runner.sh aws
         shell: bash
