@@ -2,7 +2,7 @@
 
 env="$1"
 bla=$env'_var'
-echo "github version: $env
+echo "github version: $env"
 echo $AWS_ACCESS_KEY_ID
 output_message="Error on $env"
 echo $output_message
