@@ -104,6 +104,7 @@ jobs:
               attachments: [{
                 color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' || '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
                 text: `
+            GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
             DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }}
