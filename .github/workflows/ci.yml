@@ -59,7 +59,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: chmod +x ./runner.sh && ./runner.sh #${{ env.GITHUB_RUN_NUMBER }}
+        run: chmod +x ./runner.sh && ./runner.sh ${{ env.GITHUB_RUN_NUMBER }}
         shell: bash
         working-directory: .github/scripts
         
