@@ -59,7 +59,7 @@ jobs:
       # Helm status
       - name: Check Helm Status
         id: check-helm-status
-        run: chmod +x ./runner.sh && ./runner.sh ${{ env.GITHUB_RUN_NUMBER }}
+        run: exit 1 && chmod +x ./runner.sh && ./runner.sh ${{ env.GITHUB_RUN_NUMBER }}
         shell: bash
         working-directory: .github/scripts
         
@@ -77,7 +77,7 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
-    if: failure()
+    if: success()
     needs: [aws]
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
