@@ -95,9 +95,9 @@ jobs:
             automated pr
           assignees: peter-evans
           reviewers: peter-evans
-          #team-reviewers: |
-          #  owners
-          #  maintainers
+          team-reviewers: |
+            owners
+            maintainers
           #milestone: 1
           draft: false      
         
