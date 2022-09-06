@@ -80,7 +80,7 @@ jobs:
         run: echo ${{steps.open-pr.outputs.has_changed_files}}
       
       - name: Enable Pull Request Automerge
-        if: steps.open-pr.outputs.has_changed_files == true
+        if: steps.open-pr.outputs.has_changed_files == 'true'
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
