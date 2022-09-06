@@ -64,6 +64,7 @@ jobs:
 #        working-directory: .github/scripts
                 
       - name: pull-request
+        id: open-pr
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "staging"
@@ -71,6 +72,9 @@ jobs:
           pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
           #pr_body: ":crown: *An automated PR*"
           pr_draft: true
+       
+      - name: output-number
+        run: echo ${{steps.open-pr.outputs.pr_number}}
 
 #       - name: Create Pull Request
 #         id: cpr
