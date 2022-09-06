@@ -69,7 +69,7 @@ jobs:
           destination_branch: "staging"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
-          pr_body: ":crown: *An automated PR*"
+          #pr_body: ":crown: *An automated PR*"
           pr_draft: false
 
 #       - name: Create Pull Request
