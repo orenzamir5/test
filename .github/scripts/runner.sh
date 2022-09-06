@@ -1,6 +1,6 @@
 #!/bin/bash
 
-###GITHUB_RUN_NUMBER="$1"
+####GITHUB_RUN_NUMBER="$1"
 bla=$env'_var'
 GITHUB_RUN_NUMBER="$1"
 echo "github version: $GITHUB_RUN_NUMBER"
