@@ -19,73 +19,73 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  aws:
-    #name: aws
-    #strategy:
-    #  matrix:
-    #     service: [build]
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.check-helm-status.outputs.aws_var }}
-    steps:
-      - uses: actions/checkout@v3
-      # Runs a single command using the runners shell
-#       - name: Helm Status
-#         id: helm-status
-#         run: | 
-#           helm_histroy=$(cat .github/scripts/helm_history)
-#           helm_histroy="${helm_histroy//'%'/'%25'}"
-#           helm_histroy="${helm_histroy//$'\n'/'%0A'}"
-#           helm_histroy="${helm_histroy//$'\r'/'%0D'}"
-#           output_message="""
-#             Error! Cluster version: 0.1.2233, Desired version: 0.1.2231
-#             Cluster status: deployed
-#             History:
-#             ${helm_histroy}
-#           """
-#           #output_message=$(echo -e "bla1\n bla2")
-#           output_message="${output_message//'%'/'%25'}"
-#           output_message="${output_message//$'\n'/'%0A'}"
-#           output_message="${output_message//$'\r'/'%0D'}"
-#           echo "::set-output name=helm_status::$output_message"
+#   aws:
+#     #name: aws
+#     #strategy:
+#     #  matrix:
+#     #     service: [build]
+#     runs-on: ubuntu-latest
+#     outputs:
+#       output1: ${{ steps.check-helm-status.outputs.aws_var }}
+#     steps:
+#       - uses: actions/checkout@v3
+#       # Runs a single command using the runners shell
+# #       - name: Helm Status
+# #         id: helm-status
+# #         run: | 
+# #           helm_histroy=$(cat .github/scripts/helm_history)
+# #           helm_histroy="${helm_histroy//'%'/'%25'}"
+# #           helm_histroy="${helm_histroy//$'\n'/'%0A'}"
+# #           helm_histroy="${helm_histroy//$'\r'/'%0D'}"
+# #           output_message="""
+# #             Error! Cluster version: 0.1.2233, Desired version: 0.1.2231
+# #             Cluster status: deployed
+# #             History:
+# #             ${helm_histroy}
+# #           """
+# #           #output_message=$(echo -e "bla1\n bla2")
+# #           output_message="${output_message//'%'/'%25'}"
+# #           output_message="${output_message//$'\n'/'%0A'}"
+# #           output_message="${output_message//$'\r'/'%0D'}"
+# #           echo "::set-output name=helm_status::$output_message"
 
-#       - name: Pods status
-#         id: pods-status
-#         run: |
-#           echo "slack message - ${{ steps.job1.outputs.slack_message }}"
-#           output='bla
-#           echo "::set-output name=pods_status::$output"
+# #       - name: Pods status
+# #         id: pods-status
+# #         run: |
+# #           echo "slack message - ${{ steps.job1.outputs.slack_message }}"
+# #           output='bla
+# #           echo "::set-output name=pods_status::$output"
       
-      # Helm status
-#      - name: Check Helm Status
-#        id: check-helm-status
-#        run: exit 1 && chmod +x ./runner.sh && ./runner.sh ${{ env.GITHUB_RUN_NUMBER }}
-#        shell: bash
-#        working-directory: .github/scripts
+#       # Helm status
+# #      - name: Check Helm Status
+# #        id: check-helm-status
+# #        run: exit 1 && chmod +x ./runner.sh && ./runner.sh ${{ env.GITHUB_RUN_NUMBER }}
+# #        shell: bash
+# #        working-directory: .github/scripts
                 
-      - name: pull-request
-        id: open-pr
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: "staging"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
-          #pr_body: ":crown: *An automated PR*"
-          pr_draft: false
+#       - name: pull-request
+#         id: open-pr
+#         uses: repo-sync/pull-request@v2
+#         with:
+#           destination_branch: "staging"
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
+#           #pr_body: ":crown: *An automated PR*"
+#           pr_draft: false
        
-      - name: output-number
-        run: echo ${{steps.open-pr.outputs.pr_number}}
+#       - name: output-number
+#         run: echo ${{steps.open-pr.outputs.pr_number}}
       
-      - name: output-has-changed-files
-        run: echo ${{steps.open-pr.outputs.has_changed_files}}
+#       - name: output-has-changed-files
+#         run: echo ${{steps.open-pr.outputs.has_changed_files}}
       
-      - name: Enable Pull Request Automerge
-        if: steps.open-pr.outputs.has_changed_files == 'true'
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
-          merge-method: squash
+#       - name: Enable Pull Request Automerge
+#         if: steps.open-pr.outputs.has_changed_files == 'true'
+#         uses: peter-evans/enable-pull-request-automerge@v2
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+#           merge-method: squash
 
 #       - name: Create Pull Request
 #         id: cpr
@@ -131,7 +131,6 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     if: success()
-    needs: [aws]
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
     steps:
@@ -148,7 +147,7 @@ jobs:
   slack:
     runs-on: ubuntu-latest
     if: always()
-    needs: [aws,azure]
+    needs: [azure]
     steps:
       - uses: 8398a7/action-slack@v3
         with:
