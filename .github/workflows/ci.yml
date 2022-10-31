@@ -130,7 +130,7 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
-    if: success()
+    #if: success()
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
     steps:
