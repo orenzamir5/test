@@ -10,5 +10,5 @@ echo $AWS_ACCESS_KEY_ID
 output_message="Error on $env"
 echo $output_message
 #echo $output_message
-#echo "::set-output name=$bla::$output_message"
-echo "$bla=$output_message" >> $GITHUB_OUTPUT
+echo "::set-output name=$bla::$output_message"
+#echo "$bla=$output_message" >> $GITHUB_OUTPUT
