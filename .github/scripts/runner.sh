@@ -8,8 +8,8 @@ bla=$env'_var'
 #echo "GITHUB_WORKFLOW: $GITHUB_WORKFLOW"
 #echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
 #echo $AWS_ACCESS_KEY_ID
-output_message="Error on $env"
+output_message="Error on $env yessss"
 #echo $output_message
 #echo $output_message
-echo "::set-output name=$bla::$output_message"
-#echo "$bla=$output_message" >> $GITHUB_OUTPUT
+#echo "::set-output name=$bla::$output_message"
+echo "$bla=$output_message" >> $GITHUB_OUTPUT
