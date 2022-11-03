@@ -16,8 +16,12 @@ bla=$env'_var'
 #output_message="${output_message//'%'/'%25'}"
 #output_message="${output_message//$'\n'/'%0A'}"
 #output_message="${output_message//$'\r'/'%0D'}"
-cat helm_history | sed 's/%0A/\n/g' > $output_message
-echo "$bla=$output_message" >> $GITHUB_OUTPUT
+output_message=`cat helm_history`
+#echo "$bla=$output_message" >> $GITHUB_OUTPUT
+
+echo 'CONTENT_ENV<<EOF' >> $GITHUB_ENV
+echo $output_message >> $GITHUB_ENV
+echo 'EOF' >> $GITHUB_ENV
 
 #echo "::set-output name=$bla::$output_message"
 
