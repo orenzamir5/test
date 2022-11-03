@@ -22,7 +22,7 @@ output_message=`cat helm_history`
 echo 'CONTENT_ENV<<EOF' >> $GITHUB_ENV
 echo $output_message >> $GITHUB_ENV
 echo 'EOF' >> $GITHUB_ENV
-echo $CONTENT_ENV > $output_message
-echo "$bla=$output_message" >> $GITHUB_OUTPUT
+echo $CONTENT_ENV > $ooo
+echo "$bla=$ooo" >> $GITHUB_OUTPUT
 #echo "::set-output name=$bla::$output_message"
 
