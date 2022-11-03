@@ -16,6 +16,5 @@ output_message=`cat helm_history`
 output_message="${output_message//'%'/'%25'}"
 output_message="${output_message//$'\n'/'%0A'}"
 output_message="${output_message//$'\r'/'%0D'}"
-echo "::set-output name=$bla::$output_message"
-
-#echo "$bla=$output_message" >> $GITHUB_OUTPUT
+#echo "::set-output name=$bla::$output_message"
+echo "$bla=$output_message" >> $GITHUB_OUTPUT
