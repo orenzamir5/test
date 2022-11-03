@@ -30,8 +30,8 @@ third line
 EOF
 )
 MY_STRING="${MY_STRING//'%'/'%25'}"
-MY_STRING="${MY_STRING//$'\n'/'%0A'}"
-MY_STRING="${MY_STRING//$'\r'/'%0D'}"
+MY_STRING="${MY_STRING//'\n'/'%0A'}"
+MY_STRING="${MY_STRING//'\r'/'%0D'}"
 
 echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
 #echo "::set-output name=$bla::$output_message"
