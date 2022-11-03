@@ -12,10 +12,10 @@ output_message="Error on $env yessss"
 #echo $output_message
 #echo $output_message
 
-#output_message="${output_message//'%'/'%25'}"
-#output_message="${output_message//$'\n'/'%0A'}"
-#output_message="${output_message//$'\r'/'%0D'}"
 output_message=`cat helm_history | sed s'/%0A/\n/'g`
+output_message="${output_message//'%'/'%25'}"
+output_message="${output_message//$'\n'/'%0A'}"
+output_message="${output_message//$'\r'/'%0D'}"
 echo "$bla=$output_message" >> $GITHUB_OUTPUT
 
 #echo "::set-output name=$bla::$output_message"
