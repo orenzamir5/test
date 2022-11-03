@@ -13,10 +13,10 @@ bla=$env'_var'
 #echo $output_message
 
 
-output_message="${output_message//'%'/'%25'}"
-output_message="${output_message//$'\n'/'%0A'}"
-output_message="${output_message//$'\r'/'%0D'}"
-output_message=`cat helm_history | sed 's/%0A/\n/g'`
+#output_message="${output_message//'%'/'%25'}"
+#output_message="${output_message//$'\n'/'%0A'}"
+#output_message="${output_message//$'\r'/'%0D'}"
+`cat helm_history | sed 's/%0A/\n/g'` > $output_message
 echo "$bla=$output_message" >> $GITHUB_OUTPUT
 
 #echo "::set-output name=$bla::$output_message"
