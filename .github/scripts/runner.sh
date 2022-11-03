@@ -29,10 +29,10 @@ second line
 third line
 EOF
 )
-MY_STRING="${MY_STRING//'%'/'%25'}"
-MY_STRING="${MY_STRING//'\n'/'%0A'}"
-MY_STRING="${MY_STRING//'\r'/'%0D'}"
+echo "MY_STRING<<EOF" >> $GITHUB_ENV
+echo "$MY_STRING" >> $GITHUB_ENV
+echo "EOF" >> $GITHUB_ENV
 
-echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
+#echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
 #echo "::set-output name=$bla::$output_message"
 
