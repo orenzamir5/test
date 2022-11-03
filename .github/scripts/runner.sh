@@ -20,4 +20,4 @@ output_message=`cat helm_history`
 echo "$output_message<<EOF" >> $GITHUB_ENV
 echo "$output_message" >> $GITHUB_ENV
 echo "EOF" >> $GITHUB_ENV
-echo "$bla=$GITHUB_ENV" >> $GITHUB_OUTPUT
+echo "$bla=$output_message" >> $GITHUB_OUTPUT
