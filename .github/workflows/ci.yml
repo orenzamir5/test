@@ -133,13 +133,7 @@ jobs:
     #if: success()
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
-    steps:
-      - name: create string
-        run: |
-          pwd
-        id: my_string
-
-    
+    steps:    
       - uses: actions/checkout@v3
       
       # Helm status
@@ -168,7 +162,6 @@ jobs:
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
             AWS: ${{ needs.aws.outputs.output1 }},
             AZURE: ${{ needs.azure.outputs.output1 }},
-            TEST: ${{ needs.azure.outputs.output1 }},
             DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }},
             JOB AWS STATUS: ${{ needs.aws.result }},
             JOB AZURE STATUS: ${{ needs.azure.result }}`,
