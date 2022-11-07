@@ -23,7 +23,7 @@ bla=$env'_var'
 #echo 'EOF' >> $GITHUB_ENV
 #echo "$GITHUB_ENV" > $output_message
 
-MY_STRING=$(cat helm_history)
+MY_STRING="$(cat helm_history)"
 #echo "MY_STRING<<EOF" >> $GITHUB_ENV
 #echo "$MY_STRING" >> $GITHUB_ENV
 #echo "EOF" >> $GITHUB_ENV
