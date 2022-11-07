@@ -33,6 +33,6 @@ echo "MY_STRING<<EOF" >> $GITHUB_ENV
 echo "$MY_STRING" >> $GITHUB_ENV
 echo "EOF" >> $GITHUB_ENV
 echo "${{ env.MY_STRING }}"
-echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
+#echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
 #echo "::set-output name=$bla::$output_message"
 
