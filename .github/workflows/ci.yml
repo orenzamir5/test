@@ -134,22 +134,6 @@ jobs:
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
     steps:
-      - uses: actions/checkout@v3
-      
-      # Helm status
-      - name: Check Helm Status
-        id: check-helm-status
-        run: chmod +x ./runner.sh && ./runner.sh azure
-        shell: bash
-        working-directory: .github/scripts
-  
-  
-  slack:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [azure]
-    steps:
-      
       - name: create string
         run: |
           MY_STRING=$(cat << EOF
@@ -165,7 +149,22 @@ jobs:
       - name: display string
         run: |
           echo "The string is: ${{ env.MY_STRING }}"
-
+    
+      - uses: actions/checkout@v3
+      
+      # Helm status
+      - name: Check Helm Status
+        id: check-helm-status
+        run: chmod +x ./runner.sh && ./runner.sh azure
+        shell: bash
+        working-directory: .github/scripts
+  
+  
+  slack:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [azure]
+    steps:
     
       - uses: 8398a7/action-slack@v3
         with:
