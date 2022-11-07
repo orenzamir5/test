@@ -149,6 +149,17 @@ jobs:
     if: always()
     needs: [azure]
     steps:
+      - name: create string
+        run: |
+          MY_STRING=${{ needs.azure.outputs.output1 }}
+          echo "MY_STRING<<EOF" >> $GITHUB_ENV
+          echo "$MY_STRING" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+        id: my_string
+      - name: display string
+        run: |
+          echo "The string is: ${{ env.MY_STRING }}"
+    
       - uses: 8398a7/action-slack@v3
         with:
           status: custom
