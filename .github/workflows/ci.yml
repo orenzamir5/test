@@ -136,7 +136,7 @@ jobs:
     steps:
       - name: create string
         run: |
-          ls -al
+          pwd
         id: my_string
 
     
