@@ -13,9 +13,10 @@ bla=$env'_var'
 #echo $output_message
 
 output_message=$(cat helm_history)
-output_message="${output_message//'%'/'%25'}"
-output_message="${output_message//$'\n'/'%0A'}"
-output_message="${output_message//$'\r'/'%0D'}"
+output_message=$(echo $output_message | tr '\n' ' ')
+#output_message="${output_message//'%'/'%25'}"
+#output_message="${output_message//$'\n'/'%0A'}"
+#output_message="${output_message//$'\r'/'%0D'}"
 
 #output_message=`cat helm_history`
 
