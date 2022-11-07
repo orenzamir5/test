@@ -24,10 +24,10 @@ bla=$env'_var'
 #echo "$GITHUB_ENV" > $output_message
 
 MY_STRING=$(cat helm_history)
-echo "MY_STRING<<EOF" >> $GITHUB_ENV
-echo "$MY_STRING" >> $GITHUB_ENV
-echo "EOF" >> $GITHUB_ENV
+#echo "MY_STRING<<EOF" >> $GITHUB_ENV
+#echo "$MY_STRING" >> $GITHUB_ENV
+#echo "EOF" >> $GITHUB_ENV
 #echo "${{ process.env.MY_STRING }}"
-echo "$bla=$MY_STRING" >> $GITHUB_OUTPUT
+echo "$bla=$MY_STRING" >> $GITHUB_ENV
 #echo "::set-output name=$bla::$output_message"
 
