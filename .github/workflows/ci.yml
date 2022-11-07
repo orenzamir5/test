@@ -136,14 +136,9 @@ jobs:
     steps:
       - name: create string
         run: |
-          MY_STRING=${{ needs.azure.outputs.output1 }}
-          #echo "MY_STRING<<EOF" >> $GITHUB_ENV
-          echo "$MY_STRING" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          ls -al
         id: my_string
-      - name: display string
-        run: |
-          echo "The string is: ${{ needs.azure.outputs.output1 }}"
+
     
       - uses: actions/checkout@v3
       
