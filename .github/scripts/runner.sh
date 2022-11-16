@@ -15,7 +15,7 @@ bla=$env'_var'
 output_message=$(cat helm_history)
 #output_message=$(echo $output_message | tr '%0A' '\n')
 #output_message="${output_message//'%'/'%25'}"
-output_message="${output_message//$'\n'/'%0A'}"
+output_message2="${output_message//$'\n'/'%0A'}"
 #output_message="${output_message//$'\r'/'%0D'}"
 
 #output_message=`cat helm_history`
@@ -30,6 +30,6 @@ output_message="${output_message//$'\n'/'%0A'}"
 #echo "$MY_STRING" >> $GITHUB_ENV
 #echo "EOF" >> $GITHUB_ENV
 #echo "${{ process.env.MY_STRING }}"
-echo "$bla=$output_message" >> $GITHUB_OUTPUT
+echo "$bla=$output_message2" >> $GITHUB_OUTPUT
 #echo "::set-output name=$bla::$output_message"
 
