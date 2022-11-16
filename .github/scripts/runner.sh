@@ -17,6 +17,8 @@ output_message=$(cat helm_history)
 #output_message="${output_message//'%'/'%25'}"
 output_message2="${output_message//$'%0A'/'\n'}"
 output_message2=$(echo $output_message2 | tr '\n' '\n')
+echo "-----------"
+echo $output_message2
 #output_message="${output_message//$'\r'/'%0D'}"
 
 #output_message=`cat helm_history`
