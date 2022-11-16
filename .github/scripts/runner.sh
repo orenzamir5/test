@@ -15,7 +15,7 @@ bla=$env'_var'
 output_message=`free -h`
 #output_message=$(echo $output_message | tr '%0A' '\n')
 #output_message="${output_message//'%'/'%25'}"
-#output_message="${output_message//$'%0A'/'\n'}"
+output_message="${output_message//$'%0A'/'\n'}"
 
 #output_message="${output_message//$'\r'/'%0D'}"
 
