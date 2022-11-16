@@ -12,10 +12,10 @@ bla=$env'_var'
 #echo $output_message
 #echo $output_message
 
-output_message=`free -h`
-output_message=$(echo $output_message | tr '  ' '\n')
+output_message=$(cat helm_history)
+#output_message=$(echo $output_message | tr ' ' '\n')
 #output_message="${output_message//'%'/'%25'}"
-#output_message="${output_message//$'%0A'/'\n'}"
+output_message="${output_message//$'%0A'/'\n'}"
 
 #output_message="${output_message//$'\r'/'%0D'}"
 
@@ -27,7 +27,7 @@ output_message=$(echo $output_message | tr '  ' '\n')
 # echo "$GITHUB_ENV" > $output_message
 
 echo "-----------"
-echo $output_message
+echo "$output_message"
 
 #echo "MY_STRING<<EOF" >> $GITHUB_ENV
 #echo "$MY_STRING" >> $GITHUB_ENV
