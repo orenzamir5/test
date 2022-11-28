@@ -35,9 +35,10 @@ echo "$output_message"
 #echo "EOF" >> $GITHUB_ENV
 #echo "${{ process.env.MY_STRING }}"
 #echo "$bla=${output_message}" >> $GITHUB_OUTPUT
-echo "$bla=${output_message}" >> $GITHUB_OUTPUT
 echo 'JSON_RESPONSE<<EOF' >> $GITHUB_OUTPUT
 echo $output_message >> $GITHUB_OUTPUT
 echo 'EOF' >> $GITHUB_OUTPUT
+echo "$bla=${output_message}" >> $GITHUB_OUTPUT
+
 #echo "::set-output name=$bla::$output_message"
 
