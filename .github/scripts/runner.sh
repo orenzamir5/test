@@ -42,6 +42,6 @@ echo "$output_message"
 
 #echo "::set-output name=$bla::$output_message"
 
-echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-curl https://example.com >> $GITHUB_ENV
-echo 'EOF' >> $GITHUB_ENV
+echo "$bla<<EOF" >> $GITHUB_OUTPUT
+curl https://example.com >> $GITHUB_OUTPUT
+echo "EOF" >> $GITHUB_OUTPUT
