@@ -12,7 +12,7 @@ bla=$env'_var'
 #echo $output_message
 #echo $output_message
 
-#output_message=$(cat helm_history)
+output_message=$(cat helm_history)
 #output_message=$(echo $output_message | tr ' ' '\n')
 #output_message="${output_message//'%'/'%25'}"
 #output_message="${output_message//$'%0A'/'\n'}"
@@ -43,5 +43,5 @@ echo "$output_message"
 #echo "::set-output name=$bla::$output_message"
 
 echo "$bla<<EOF" >> $GITHUB_OUTPUT
-curl https://example.com >> $GITHUB_OUTPUT
+echo $output_message >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT
