@@ -161,6 +161,8 @@ jobs:
                 text: `
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
             AWS: ${{ needs.aws.outputs.output1 }},
+            BLA:
+            ${{ env.JSON_RESPONSE }},
             AZURE:
             ${{ needs.azure.outputs.output1 }},
             DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }},
