@@ -44,5 +44,5 @@ echo "$output_message"
 
 echo "$bla<<EOF" >> $GITHUB_OUTPUT
 echo $output_message >> $GITHUB_OUTPUT
-echo $output_message | tr ' ' '\n' >> $GITHUB_OUTPUT
+echo $output_message | tr '\n' '\n' >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT
