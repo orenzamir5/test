@@ -133,6 +133,7 @@ jobs:
     #if: success()
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
+      #output2: ${{ steps.get-slack-user-id.slack_user_id }}
     steps:    
       - uses: actions/checkout@v3
       
