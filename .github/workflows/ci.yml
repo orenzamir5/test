@@ -144,9 +144,7 @@ jobs:
         working-directory: .github/scripts
       
       - name: Get slack user ID
-        env:
-          AUTHOR: BLA
-        run: chmod +x ./get-slack-user-id.sh
+        run: chmod +x ./get-slack-user-id.sh BLA
         shell: bash
         working-directory: .github/scripts
   
