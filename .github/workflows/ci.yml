@@ -159,7 +159,7 @@ jobs:
     
       - uses: 8398a7/action-slack@v3
         with:
-          mention: 'UBEUMJMM2' # replace S012ABC3Y4Z with your user group id 
+          mention: ${{ needs.azure.outputs.output2 }} # replace S012ABC3Y4Z with your user group id 
           if_mention: 'failure,cancelled'
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
