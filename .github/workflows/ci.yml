@@ -152,6 +152,8 @@ jobs:
     
       - uses: 8398a7/action-slack@v3
         with:
+          mention: 'orenz' # replace S012ABC3Y4Z with your user group id 
+          #if_mention: 'failure,cancelled'
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
           custom_payload: |
@@ -159,7 +161,6 @@ jobs:
               attachments: [{
                 color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' || '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
                 text: `
-            @orenz 
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
