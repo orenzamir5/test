@@ -142,6 +142,11 @@ jobs:
         run: chmod +x ./runner.sh && ./runner.sh azure
         shell: bash
         working-directory: .github/scripts
+      
+      - name: Get slack user ID
+        run: chmod +x ./get-slack-user-id.sh ${process.env.AS_AUTHOR}
+        shell: bash
+        working-directory: .github/scripts
   
   
   slack:
@@ -153,7 +158,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           mention: 'UBEUMJMM2' # replace S012ABC3Y4Z with your user group id 
-          #if_mention: 'failure,cancelled'
+          if_mention: 'failure,cancelled'
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
           custom_payload: |
@@ -161,6 +166,7 @@ jobs:
               attachments: [{
                 color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' || '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
                 text: `
+            SLACK_USER_ID: ${{ env.SLACK_USER_ID }}
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
