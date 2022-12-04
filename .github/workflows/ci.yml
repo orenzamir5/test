@@ -144,7 +144,8 @@ jobs:
         working-directory: .github/scripts
       
       - name: Get slack user ID
-        run: chmod +x ./get-slack-user-id.sh ${process.env.AS_AUTHOR}
+        run: | 
+          echo SLACK_USER_ID=$(cat slack-user-id.txt | grep ${process.env.AS_AUTHOR} | awk '{print $2}') >> $GITHUB_ENV
         shell: bash
         working-directory: .github/scripts
   
