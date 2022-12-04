@@ -145,7 +145,7 @@ jobs:
       
       - name: Get slack user ID
         env:
-          AUTHOR: ${{ process.env.AS_AUTHOR }}
+          AUTHOR: BLA
         run: chmod +x ./get-slack-user-id.sh
         shell: bash
         working-directory: .github/scripts
