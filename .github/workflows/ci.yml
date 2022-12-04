@@ -152,8 +152,7 @@ jobs:
     
       - uses: 8398a7/action-slack@v3
         with:
-          author_name: '@orenz'
-          mention: 'orenz' # replace S012ABC3Y4Z with your user group id 
+          mention: 'here' # replace S012ABC3Y4Z with your user group id 
           #if_mention: 'failure,cancelled'
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
