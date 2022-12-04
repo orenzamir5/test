@@ -168,8 +168,8 @@ jobs:
               attachments: [{
                 color: '${{ needs.aws.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' || '${{ needs.aws.result }}' === 'failure' ? 'danger' : 'warning',
                 text: `
-            SLACK_USER_ID: ${{ env.slack_user_id }}
-            GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
+            SLACK_USER_ID: ${{ env.slack_user_id }},
+            GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
             ${{ env.JSON_RESPONSE }},
