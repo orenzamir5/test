@@ -14,11 +14,11 @@ bla=$env'_var'
 
 output_message=$(cat helm_history)
 #output_message=$(echo $output_message | tr ' ' '\n')
-#output_message="${output_message//'%'/'%25'}"
-#output_message="${output_message//$'%0A'/'\n'}"
+output_message="${output_message//'%'/'%25'}"
+output_message="${output_message//$'%0A'/'\n'}"
 #output_message=$(echo $output_message | sed 's/%0A/\n/g')
 #output_message=$(echo $output_message | sed 's/complete/\n complete/g') 
-#output_message="${output_message//$'\r'/'%0D'}"
+output_message="${output_message//$'\r'/'%0D'}"
 
 #output_message=`cat helm_history`
 
@@ -40,9 +40,9 @@ echo "$output_message"
 #echo 'EOF' >> $GITHUB_OUTPUT
 #echo "$bla=${output_message}" >> $GITHUB_OUTPUT
 
-#echo "::set-output name=$bla::$output_message"
+echo "::set-output name=$bla::$output_message"
 
-echo "$bla<<EOF" >> $GITHUB_OUTPUT
-echo $output_message >> $GITHUB_OUTPUT
-echo $output_message | tr '\n' '\n' >> $GITHUB_OUTPUT
-echo "EOF" >> $GITHUB_OUTPUT
+#echo "$bla<<EOF" >> $GITHUB_OUTPUT
+#echo $output_message >> $GITHUB_OUTPUT
+#echo $output_message | tr '\n' '\n' >> $GITHUB_OUTPUT
+#echo "EOF" >> $GITHUB_OUTPUT
