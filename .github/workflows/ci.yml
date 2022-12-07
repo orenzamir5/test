@@ -154,7 +154,7 @@ jobs:
   slack:
     runs-on: ubuntu-latest
     needs: [azure]
-    if: always() && github.ref_name == 'main'
+    if: always() && !contains(needs.*.result, 'cancelled') && github.ref_name == 'bla'
     steps:
     
       - uses: 8398a7/action-slack@v3
