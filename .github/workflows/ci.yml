@@ -153,8 +153,8 @@ jobs:
   
   slack:
     runs-on: ubuntu-latest
-    if: always()
     needs: [azure]
+    if: always() && github.ref_name == 'bla'
     steps:
     
       - uses: 8398a7/action-slack@v3
