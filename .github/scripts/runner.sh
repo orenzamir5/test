@@ -40,7 +40,7 @@ echo "$output_message"
 #echo 'EOF' >> $GITHUB_OUTPUT
 #echo "$bla=${output_message}" >> $GITHUB_OUTPUT
 
-output_message="bla bla bla :white_check_mark:"
+output_message="Helm chart version: v0.1.1367 is deployed :white_check_mark:"
 #echo "::set-output name=$bla::$output_message"
 echo "::set-output name=$bla::$output_message"
 
