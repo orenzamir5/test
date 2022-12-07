@@ -123,6 +123,20 @@ jobs:
 #         shell: bash
 #         working-directory: .github/deploy-checker
 
+  test:
+    #name: aws
+    #strategy:
+    #  matrix:
+    #     service: [build]
+    runs-on: ubuntu-latest
+    #if: success()
+    steps:    
+      - uses: actions/checkout@v3
+      
+      # Helm status
+      - name: echo hello
+        run: echo hello
+        shell: bash
         
   azure:
     #name: aws
@@ -153,7 +167,7 @@ jobs:
   
   slack:
     runs-on: ubuntu-latest
-    needs: [azure]
+    needs: [test,azure]
     if: always() && !contains(needs.*.result, 'cancelled') && github.ref_name == 'bla'
     steps:
     
