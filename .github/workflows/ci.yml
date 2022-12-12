@@ -130,13 +130,16 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     #if: success()
-    steps:    
-      - uses: actions/checkout@v3
+    steps:
+      - with:
+          node: '19.x'
+        uses: actions/checkout@v3
       
       # Helm status
       - name: echo hello
         run: echo hello
         shell: bash
+
         
   azure:
     #name: aws
@@ -163,6 +166,10 @@ jobs:
         run: chmod +x ./get-slack-user-id.sh && ./get-slack-user-id.sh BLA
         shell: bash
         working-directory: .github/scripts
+        
+      - name: Run NPM
+        run: npm install -g @testim/testim-cli
+        shell: bash
   
   
   slack:
