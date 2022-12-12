@@ -131,9 +131,9 @@ jobs:
     runs-on: ubuntu-latest
     #if: success()
     steps:
-      - with:
-          node: '19.x'
-        uses: actions/checkout@v3
+#      - with:
+#          node: '19.x'
+      - uses: actions/checkout@v3
       
       # Helm status
       - name: echo hello
