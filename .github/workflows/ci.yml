@@ -187,7 +187,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                color: '${{ needs.test.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' ? 'failure' : '' || '${{ env.STATUS }}' === 'noncolor' ? '' : '',
+                color: '${{ needs.test.result }}' === 'success' && '${{ needs.azure.result }}' === 'success' ? 'good' : '${{ needs.azure.result }}' === 'failure' ? 'failure' : 'failure' || '${{ env.STATUS }}' === 'noncolor' ? '' : '',
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
