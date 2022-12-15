@@ -128,7 +128,7 @@ jobs:
       
       # Helm status
       - name: echo hello
-        run: echo hello && exit 1
+        run: echo hello && echo "STATUS=bla" >> $GITHUB_ENV && exit 1
         shell: bash
 
         
