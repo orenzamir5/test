@@ -15,6 +15,7 @@ on:
 
 env:
   GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
+  STATUS: "bla"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -128,7 +129,7 @@ jobs:
       
       # Helm status
       - name: echo hello
-        run: echo hello && echo "STATUS=bla" >> $GITHUB_ENV && exit 1
+        run: echo hello && exit 1
         shell: bash
 
         
