@@ -161,11 +161,11 @@ jobs:
         shell: bash
         working-directory: .github/scripts
       
-      - name: Get slack user ID
-        id: get-slack-user-id
-        run: chmod +x ./get-slack-user-id.sh && ./get-slack-user-id.sh BLA && echo "STATUS=noncolor" >> $GITHUB_ENV
-        shell: bash
-        working-directory: .github/scripts
+#       - name: Get slack user ID
+#         id: get-slack-user-id
+#         run: chmod +x ./get-slack-user-id.sh && ./get-slack-user-id.sh BLA && echo "STATUS=noncolor" >> $GITHUB_ENV
+#         shell: bash
+#         working-directory: .github/scripts
         
       - name: Run NPM
         run: npm install -g @testim/testim-cli
