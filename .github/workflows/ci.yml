@@ -15,7 +15,6 @@ on:
 
 env:
   GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
-  STATUS: "nocolor"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
