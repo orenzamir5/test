@@ -15,7 +15,7 @@ on:
 
 env:
   GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
-  STATUS: "bla"
+  STATUS: "nocolor"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -188,7 +188,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                color: '${{ needs.test.result }}' === 'success' ? 'good' : '${{ env.STATUS }}' === 'nocolor' ? '' : 'failure'
+                color: '${{ needs.test.result }}' === 'success' ? 'good' : '${{ env.STATUS }}' === 'nocolor' ? '' : 'failure',
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
