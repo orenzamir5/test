@@ -184,13 +184,13 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           mention: ${{ needs.azure.outputs.output2 }} # replace S012ABC3Y4Z with your user group id 
-          if_mention: 'failure,cancelled'
+          #if_mention: 'failure,cancelled'
           status: custom
           fields: workflow,job,commit,repo,ref,author,took,message,action
           custom_payload: |
             {
               attachments: [{
-                color: "${{ needs.test.result }}" === 'success' ? 'good' : "${{ needs.azure.outputs.output3 }}" === 'nocolor' ? '' : 'danger',
+                color: "${{ needs.test.result }}" === "success" ? 'good' : "${{ needs.azure.outputs.output3 }}" === "nocolor" ? '' : 'danger',
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
