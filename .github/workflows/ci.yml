@@ -190,7 +190,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                color: "${{ needs.test.result }}" === 'success' ? 'good' : "${{ env.status }}" === 'nocolor' ? '' : 'danger',
+                color: "${{ needs.test.result }}" === 'success' ? 'good' : "${{ needs.azure.outputs.output3 }}" === 'nocolor' ? '' : 'danger',
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
