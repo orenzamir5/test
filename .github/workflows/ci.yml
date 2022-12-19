@@ -133,6 +133,7 @@ jobs:
           echo 'action_state<<EOF' >> $GITHUB_ENV
           echo nocolor >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+          echo "{{ env.action_state }}"
         shell: bash
 
         
