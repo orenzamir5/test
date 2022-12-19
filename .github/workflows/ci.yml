@@ -121,6 +121,8 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.check-helm-status.outputs.status }}
     #if: success()
     steps:
 #      - with:
@@ -129,11 +131,7 @@ jobs:
       
       # Helm status
       - name: echo hello
-        run: |
-          echo 'action_state<<EOF' >> $GITHUB_ENV
-          echo nocolor >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          echo "{{ env.action_state }}"
+        run: echo "STATUS=green" >> $GITHUB_OUTPUT
         shell: bash
 
         
@@ -193,11 +191,11 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                color: "${{ needs.test.result }}" === 'success' ? 'good' : "${{ env.STATUS }}" === 'nocolor' ? '' : 'danger',
+                color: "${{ needs.test.result }}" === 'success' ? 'good' : "${{ env.status }}" === 'nocolor' ? '' : 'danger',
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
-            STATUS: ${{ env.action_state }},
+            STATUS: ${{ env.STATUS }},
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
             ${{ env.JSON_RESPONSE }},
