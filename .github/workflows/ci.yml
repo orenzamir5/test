@@ -129,7 +129,7 @@ jobs:
       
       # Helm status
       - name: echo hello
-        run: echo "STATUS=nocolor" >> $GITHUB_ENV
+        run: echo "action_state=nocolor" >> $GITHUB_ENV
         shell: bash
 
         
@@ -193,7 +193,7 @@ jobs:
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
-            STATUS: ${{ env.STATUS }}
+            STATUS: "${{ env.action_state }}"
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
             ${{ env.JSON_RESPONSE }},
