@@ -38,7 +38,7 @@ echo "$output_message"
 #echo 'output_message<<EOF' >> $GITHUB_OUTPUT
 #echo $output_message >> $GITHUB_OUTPUT
 #echo 'EOF' >> $GITHUB_OUTPUT
-#echo "$bla=${output_message}" >> $GITHUB_OUTPUT
+echo "status=nocolor" >> $GITHUB_OUTPUT
 
 output_message="Helm chart version: v0.1.1367 is deployed :tada:"
 #echo "::set-output name=$bla::$output_message"
