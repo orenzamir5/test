@@ -121,8 +121,6 @@ jobs:
     #  matrix:
     #     service: [build]
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.check-helm-status.outputs.status }}
     #if: success()
     steps:
 #      - with:
@@ -145,6 +143,7 @@ jobs:
     outputs:
       output1: ${{ steps.check-helm-status.outputs.azure_var }}
       output2: ${{ steps.get-slack-user-id.outputs.slack_user_id }}
+      output3: ${{ steps.check-helm-status.outputs.status }}
     steps:    
       - uses: actions/checkout@v3
       
@@ -195,7 +194,7 @@ jobs:
                 text: `
             SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
             GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
-            STATUS: ${{ env.STATUS }},
+            STATUS: ${{ needs.azure.outputs.output3 }},
             AWS: ${{ needs.aws.outputs.output1 }},
             BLA:
             ${{ env.JSON_RESPONSE }},
