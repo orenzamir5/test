@@ -158,6 +158,7 @@ jobs:
           echo helm_charts_repo: $helm_charts_repo
           echo "BLA=charts" >> $GITHUB_ENV
           echo BLA: ${{ env.BLA }}
+          echo xxdd
           
       # # Helm status
       # - name: Check Helm Status
