@@ -155,7 +155,8 @@ jobs:
         run: |
           echo BRANCH_SUFFIX: ${{ env.BRANCH_SUFFIX }}
           helm_charts_repo=$(echo ${{ env.BRANCH_SUFFIX }} | sed s'/-//'g)
-          echo "HELM_CHARTS_REPO=$helm_charts_repo-charts" >> $GITHUB_ENV
+          echo helm_charts_repo: $helm_charts_repo
+          echo "HELM_CHARTS_REPO=$helm_charts_repo'-charts'" >> $GITHUB_ENV
           echo ${{ env.HELM_CHARTS_REPO }}
           
       # # Helm status
