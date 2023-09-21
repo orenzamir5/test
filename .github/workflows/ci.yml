@@ -149,7 +149,7 @@ jobs:
 
       - name: TEST
         run: |
-          echo XXXX: ${{ steps.check-helm-status.outputs.azure_var }}
+          echo XXXX: ${{ steps.check-helm-status.outputs.status }}
           #helm_charts_repo = $(echo ${{ needs.set_branch_env_var.outputs.helm_repo_suffix }} | sed s'/-//'g)
           #helm_charts_repo = $helm_charts_repo-charts
           #echo "HELM_CHARTS_REPO=$helm_charts_repo" >> $GITHUB_ENV
