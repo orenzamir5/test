@@ -129,7 +129,7 @@ jobs:
       
       # Helm status
       - name: echo hello
-        run: echo "STATUS=green" >> $GITHUB_OUTPUT
+        run: echo "STATUS=green" >> $GITHUB_ENV
         shell: bash
 
         
