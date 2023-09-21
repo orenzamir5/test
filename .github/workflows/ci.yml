@@ -146,13 +146,21 @@ jobs:
       output3: ${{ steps.check-helm-status.outputs.status }}
     steps:    
       - uses: actions/checkout@v3
-      
-      # Helm status
-      - name: Check Helm Status
-        id: check-helm-status
-        run: chmod +x ./runner.sh && ./runner.sh azure
-        shell: bash
-        working-directory: .github/scripts
+
+      - name: TEST
+        run: |
+          echo XXXX: ${{ steps.check-helm-status.outputs.azure_var }}
+          #helm_charts_repo = $(echo ${{ needs.set_branch_env_var.outputs.helm_repo_suffix }} | sed s'/-//'g)
+          #helm_charts_repo = $helm_charts_repo-charts
+          #echo "HELM_CHARTS_REPO=$helm_charts_repo" >> $GITHUB_ENV
+          #helm push $CHART_NAME-${{ needs.set_branch_env_var.outputs.version }}.tgz oci://${{ env.ACR_CHARTS_REGISTRY }}/${{ env.HELM_CHARTS_REPO }}
+          
+      # # Helm status
+      # - name: Check Helm Status
+      #   id: check-helm-status
+      #   run: chmod +x ./runner.sh && ./runner.sh azure
+      #   shell: bash
+      #   working-directory: .github/scripts
       
 #       - name: Get slack user ID
 #         id: get-slack-user-id
@@ -160,53 +168,53 @@ jobs:
 #         shell: bash
 #         working-directory: .github/scripts
         
-      - name: Run NPM
-        run: npm install -g @testim/testim-cli
-        shell: bash
+      # - name: Run NPM
+      #   run: npm install -g @testim/testim-cli
+      #   shell: bash
   
-      - name: pull-request
-        id: open-pr
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: "staging"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
-          pr_body: ":crown: *An automated PR*"
-          pr_draft: true
+      # - name: pull-request
+      #   id: open-pr
+      #   uses: repo-sync/pull-request@v2
+      #   with:
+      #     destination_branch: "staging"
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     pr_title: "Pulling ${{ github.ref }} into master" # Title of pull request
+      #     pr_body: ":crown: *An automated PR*"
+      #     pr_draft: true
         
 
-  slack:
-    runs-on: ubuntu-latest
-    needs: [test,azure]
-    if: always() && !contains(needs.*.result, 'cancelled')
-    steps:
+  # slack:
+  #   runs-on: ubuntu-latest
+  #   needs: [test,azure]
+  #   if: always() && !contains(needs.*.result, 'cancelled')
+  #   steps:
     
-      - uses: 8398a7/action-slack@v3
-        with:
-          mention: ${{ needs.azure.outputs.output2 }} # replace S012ABC3Y4Z with your user group id 
-          #if_mention: 'failure,cancelled'
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took,message,action
-          custom_payload: |
-            {
-              attachments: [{
-                color: "${{ needs.azure.result }}" === "success" ? 'good' : "${{ needs.azure.outputs.output3 }}" === "nocolor" ? '' : 'danger',
-                text: `
-            SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
-            GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
-            STATUS: ${{ needs.azure.outputs.output3 }},
-            AWS: ${{ needs.aws.outputs.output1 }},
-            BLA:
-            ${{ env.JSON_RESPONSE }},
-            AZURE:
-            ${{ needs.azure.outputs.output1 }},
-            DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }},
-            JOB AWS STATUS: ${{ needs.aws.result }},
-            JOB AZURE STATUS: ${{ needs.azure.result }}`,
-              }]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #     - uses: 8398a7/action-slack@v3
+  #       with:
+  #         mention: ${{ needs.azure.outputs.output2 }} # replace S012ABC3Y4Z with your user group id 
+  #         #if_mention: 'failure,cancelled'
+  #         status: custom
+  #         fields: workflow,job,commit,repo,ref,author,took,message,action
+  #         custom_payload: |
+  #           {
+  #             attachments: [{
+  #               color: "${{ needs.azure.result }}" === "success" ? 'good' : "${{ needs.azure.outputs.output3 }}" === "nocolor" ? '' : 'danger',
+  #               text: `
+  #           SLACK_USER_ID: ${{ needs.azure.outputs.output2 }},
+  #           GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }},
+  #           STATUS: ${{ needs.azure.outputs.output3 }},
+  #           AWS: ${{ needs.aws.outputs.output1 }},
+  #           BLA:
+  #           ${{ env.JSON_RESPONSE }},
+  #           AZURE:
+  #           ${{ needs.azure.outputs.output1 }},
+  #           DEPLOYMENT_STATUS: ${{ env.DEPLOYMENT_STATUS }},
+  #           JOB AWS STATUS: ${{ needs.aws.result }},
+  #           JOB AZURE STATUS: ${{ needs.azure.result }}`,
+  #             }]
+  #           }
+  #       env:
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   
 
   # This workflow contains a single job called "build"
