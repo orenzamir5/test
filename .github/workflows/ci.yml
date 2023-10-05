@@ -156,7 +156,7 @@ jobs:
           echo BRANCH_SUFFIX: ${{ env.BRANCH_SUFFIX }}
           helm_charts_repo=$(echo ${{ env.BRANCH_SUFFIX }} | sed s'/-//'g)
           helm_charts_repo_bla=$helm_charts_repo'-charts'
-          echo $helm_charts_repo_bla
+          echo "XXXX: $helm_charts_repo_bla"
           
       # # Helm status
       # - name: Check Helm Status
