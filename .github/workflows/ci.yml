@@ -147,6 +147,9 @@ jobs:
     steps:    
       - uses: actions/checkout@v3
 
+      - name: Instakk JQ
+        run: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\ chmod +x /usr/bin/yq
+    
       - name: Install Helmer
         run: curl -s https://raw.githubusercontent.com/royalsarkis/helmer/main/helmer.sh -o ~/bin/helmer && chmod +x ~/bin/helmer && export PATH=$PATH:~/bin 
 
