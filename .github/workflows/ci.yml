@@ -147,6 +147,9 @@ jobs:
     steps:    
       - uses: actions/checkout@v3
 
+      - name: Install Helmer
+        run: curl -s https://raw.githubusercontent.com/royalsarkis/helmer/main/helmer.sh -o ~/bin/helmer && chmod +x ~/bin/helmer && export PATH=$PATH:~/bin 
+
       - name: echo hello
         run: echo "BRANCH_SUFFIX=-master" >> $GITHUB_ENV
         shell: bash
@@ -157,6 +160,7 @@ jobs:
           helm_charts_repo=$(echo ${{ env.BRANCH_SUFFIX }} | sed s'/-//'g)
           helm_charts_repo_bla=$helm_charts_repo'-charts'
           echo "XXXX: $helm_charts_repo_bla"
+          helmer package
           
       # # Helm status
       # - name: Check Helm Status
