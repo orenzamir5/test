@@ -132,6 +132,7 @@ jobs:
       - name: echo test
         run: |
           wget http://github.com/ziyaddin/xampp/archive/master.zip
+          export AZURE_DEVOPS_EXT_PAT=${{ secrets.AZURE_ARTIFACTS_TOKEN }}
           az devops login --organization ${{ env.AZURE_ARTIFACTS_ORG }}
           az artifacts universal publish \
           --organization ${{ env.AZURE_ARTIFACTS_ORG }} \
