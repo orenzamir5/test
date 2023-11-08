@@ -132,10 +132,7 @@ jobs:
       - name: echo test
         run: |
           wget http://github.com/ziyaddin/xampp/archive/master.zip
-          az --version
-          az upgrade
-          az extension add --name azure-devops
-          az devops login --organization ${{ env.AZURE_ARTIFACTS_ORG }} --pat ${{ secrets.AZURE_ARTIFACTS_TOKEN }}
+          az devops login --organization ${{ env.AZURE_ARTIFACTS_ORG }}
           az artifacts universal publish \
           --organization ${{ env.AZURE_ARTIFACTS_ORG }} \
           --project testing \
