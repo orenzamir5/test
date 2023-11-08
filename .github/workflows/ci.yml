@@ -134,7 +134,7 @@ jobs:
           wget http://github.com/ziyaddin/xampp/archive/master.zip
           #export AZURE_DEVOPS_EXT_PAT=${{ secrets.AZURE_ARTIFACTS_TOKEN }}
           export AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_ID=efd88607-cd71-41a7-843f-c55c657ab515
-          export AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY=M4y8Q~7wNhKbGrbCKX4keufxxAERq6r3bkAQ3boM
+          export AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY=""
           az devops login --organization ${{ env.AZURE_ARTIFACTS_ORG }}
           az artifacts universal publish \
           --organization ${{ env.AZURE_ARTIFACTS_ORG }} \
