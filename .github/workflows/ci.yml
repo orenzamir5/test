@@ -138,7 +138,7 @@ jobs:
         uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
           command: cp
-          source: ./static-fe-rc.zip
+          source: ./master.zip
           destination: s3://artifacts-test-bucket1/test1/static-fe-rc.zip
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_TEST }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}
