@@ -1,0 +1,29 @@
+name: Kustomize Build
+
+on:
+  pull_request:
+    paths:
+      - '**/overlays/**/*'
+
+jobs:
+  kustomize-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/kustomize
+          kustomize version
+
+      - name: Run kustomize build for changed overlays
+        run: |
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^overlays/')
+          for changed_file in $changed_files; do
+            overlay=$(dirname "$changed_file")
+            echo "Running kustomize build for $overlay"
+            kustomize build "$overlay" || exit 1
+          done
