@@ -1,1 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: metrix
+  namespace: metrix
+spec:
+  chart:
+    spec:
+      chart: metrix
+      sourceRef:
+        name: charts
+     version: 0.1.*
+  values:
+    clusterName: "test"
 bla
