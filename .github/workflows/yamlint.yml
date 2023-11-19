@@ -1,0 +1,26 @@
+name: Yaml Linter
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  pull_request:
+    branches:
+      - yamlint-test
+jobs:
+  yamllint:
+    name: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v27
+
+      - name: Run yamllint on changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            yamllint -c .github/configs/lintconf.yaml $file
+          done
