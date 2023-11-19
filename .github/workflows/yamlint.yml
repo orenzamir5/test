@@ -21,6 +21,11 @@ jobs:
 
       - name: Run yamllint on changed files
         run: |
+          yamlint_error=false
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            yamllint -c .github/configs/lintconf.yaml $file || true
+            yamllint -c .github/configs/lintconf.yaml $file || yamlint_error=true
           done
+          if [ "$yamlint_error" = true ]; then
+            echo "error"
+            exit 1
+          fi
