@@ -25,12 +25,11 @@ jobs:
       - name: Run spectral on changed files
         continue-on-error: true
         run: |
+          spectralint_error=false
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            spectral lint $file
+            spectral lint $file || spectralint_error=true 
           done
-
-      - name: Spectral Report
-        uses: github/codeql-action/upload-sarif@v2
-        if: always()
-        with:
-          sarif_file: spectral-results.sarif
+          if [ "$spectralint_error" = true]; then
+            echo "Errors found!"
+            exit 1
+          fi
