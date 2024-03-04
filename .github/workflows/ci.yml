@@ -179,10 +179,11 @@ jobs:
       - name: Set release drafter variables
         id: set_release_drafter_vars
         run: |
-          var=$(echo release_drafter_body <<EOF  
+          {
+          echo 'release_drafter_body<<EOF'  
           echo "## Changes oren zamir test \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
-          EOF
-          ) >> $GITHUB_OUTPUT
+          echo EOF
+          } >> $GITHUB_OUTPUT
           echo "${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}"
     
       # # Helm status
