@@ -126,9 +126,10 @@ jobs:
       - name: Set release drafter variables
         id: "set_release_drafter_vars"
         run: |
-          release_drafter_body=$(echo "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|' <<EOF
+          body=$(echo "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|' <<EOF
           EOF
-          ) >> $GITHUB_OUTPUT
+          ) 
+          echo "release_drafter_body=$body" >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
   
   trigger_upstream_c4_workflow:
