@@ -131,8 +131,15 @@ jobs:
           EOF
           ) >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
-          echo "FE changes: ${{ needs.release_drafter.outputs.release_drafter_body }}"
+  
+  trigger_upstream_c4_workflow:
+    name: trigger_upstream_c4_workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Release FE Notes
+        run: |
           echo "FE Tag URL: ${{ needs.release_drafter.outputs.release_drafter_tag_url }}"
+          echo "FE changes: ${{ needs.release_drafter.outputs.release_drafter_body }}"
           
   test:
     #name: aws
