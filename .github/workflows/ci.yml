@@ -119,9 +119,10 @@ jobs:
   release_drafter:
     name: release_drafter
     runs-on: ubuntu-latest
-    #outputs:
-    #  release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
-    #  release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
+    outputs:
+      release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
+      release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
+      my_var: ${{ steps.set_release_drafter_vars.outputs.my_var }}
     steps:
       - name: Set release drafter variables
         id: "set_release_drafter_vars"
