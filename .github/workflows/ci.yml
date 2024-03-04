@@ -116,6 +116,23 @@ jobs:
 #         shell: bash
 #         working-directory: .github/deploy-checker
 
+  release_drafter:
+    name: release_drafter
+    runs-on: ubuntu-latest
+    outputs:
+      release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
+      release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
+    steps:
+      - name: Set release drafter variables
+        id: set_release_drafter_vars
+        run: |
+          var=$(echo release_drafter_body <<EOF
+          echo "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
+          EOF
+          ) >> $GITHUB_OUTPUT
+          echo "release_drafter_tag_url=${{ steps.release_drafter.outputs.html_url }}" >> $GITHUB_OUTPUT
+          echo "FE changes: ${{ needs.release_drafter.outputs.release_drafter_body }}"
+          
   test:
     #name: aws
     #strategy:
@@ -175,16 +192,7 @@ jobs:
       #     helm_charts_repo_bla=$helm_charts_repo'-charts'
       #     echo "XXXX: $helm_charts_repo_bla"
       #     helmer package
-      
-      - name: Set release drafter variables
-        id: set_release_drafter_vars
-        run: |
-          {
-          echo 'release_drafter_body<<EOF'  
-          echo "## Changes oren zamir test \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
-          echo EOF
-          } >> $GITHUB_OUTPUT
-          echo "${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}"
+    
     
       # # Helm status
       # - name: Check Helm Status
