@@ -180,7 +180,7 @@ jobs:
         id: set_release_drafter_vars
         run: |
           echo "release_drafter_body<<EOF" >> $GITHUB_OUTPUT
-          echo "## Changes oren zamir test" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | sed 's//\\n/|/g' >> $GITHUB_OUTPUT
+          echo "## Changes oren zamir test" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | sed "s//\\n/|/g" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=${{ steps.release_drafter.outputs.html_url }}" >> $GITHUB_OUTPUT
 
