@@ -141,9 +141,9 @@ jobs:
     steps:
       - name: Print Release FE Notes
         run: |
-          echo "FE Tag URL: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}"
-          echo "FE changes: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}"
-          echo "Output [${{steps.set_release_drafter_vars.outputs.my_var}}]"
+          echo "FE Tag URL: ${{ needs.release_drafter.outputs.release_drafter_tag_url }}"
+          echo "FE changes: ${{ needs.release_drafter.outputs.release_drafter_body }}"
+          echo "Output [${{needs.release_drafter.outputs.my_var}}]"
           
   test:
     #name: aws
