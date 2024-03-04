@@ -127,8 +127,8 @@ jobs:
         id: "set_release_drafter_vars"
         run: |
           body=echo $(cat <<EOF
-          "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
-          EOF
+          echo "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
+          echo EOF
           ) 
           echo "release_drafter_body=$body" >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
