@@ -119,9 +119,9 @@ jobs:
   release_drafter:
     name: release_drafter
     runs-on: ubuntu-latest
-    outputs:
-      release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
-      release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
+    #outputs:
+    #  release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
+    #  release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
     steps:
       - name: Set release drafter variables
         id: set_release_drafter_vars
@@ -138,8 +138,8 @@ jobs:
     steps:
       - name: Print Release FE Notes
         run: |
-          echo "FE Tag URL: ${{ steps.release_drafter.outputs.release_drafter_tag_url }}"
-          echo "FE changes: ${{ steps.release_drafter.outputs.release_drafter_body }}"
+          echo "FE Tag URL: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}"
+          echo "FE changes: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}"
           
   test:
     #name: aws
