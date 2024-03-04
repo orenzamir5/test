@@ -131,6 +131,9 @@ jobs:
           EOF
           ) >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
+          my_var="Hello World"
+          echo "Output [$my_var]"
+          echo "my_var=$my_var" >> $GITHUB_OUTPUT
   
   trigger_upstream_c4_workflow:
     name: trigger_upstream_c4_workflow
@@ -140,6 +143,7 @@ jobs:
         run: |
           echo "FE Tag URL: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}"
           echo "FE changes: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}"
+          echo "Output [${{steps.set_release_drafter_vars.outputs.my_var}}]"
           
   test:
     #name: aws
