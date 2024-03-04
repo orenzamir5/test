@@ -139,6 +139,7 @@ jobs:
   trigger_upstream_c4_workflow:
     name: trigger_upstream_c4_workflow
     runs-on: ubuntu-latest
+    needs: release_drafter
     steps:
       - name: Print Release FE Notes
         run: |
