@@ -123,11 +123,15 @@ jobs:
       release_drafter_body: ${{ steps.set_release_drafter_vars.outputs.release_drafter_body }}
       release_drafter_tag_url: ${{ steps.set_release_drafter_vars.outputs.release_drafter_tag_url }}
     steps:
+      - name: Create JSON file
+        run: |
+          echo '{"release_drafter_tag_url": "https://github.com", "release_drafter_body": "- Cycle91 @dekel-upstream (#3897) - remove navigate from Auth0Provider @tomerl-upstream (#3896) - Ariel c4 16936 update recharts package @ariel-upstream (#3873)", "fe_version": "v2.91.0"}' > data.json
+      
       - name: Set release drafter variables
         id: "set_release_drafter_vars"
         run: |
           echo "release_drafter_body<<EOF" >> $GITHUB_OUTPUT
-          echo "## Changes oren zamir \n hello world" | sed 's/## Changes//g' | sed 's/* No changes/No changes/g' | sed '/^$/d' | tr -s '[\n]' '|' >> $GITHUB_OUTPUT
+          cat data.json | sed 's/## Changes//g' | sed 's/* No changes/No changes/g' | sed '/^$/d' | tr -s '[\n]' '|' >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
   
