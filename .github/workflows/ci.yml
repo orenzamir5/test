@@ -130,8 +130,9 @@ jobs:
           echo "## Changes oren zamir \n hello world" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|'
           EOF
           ) >> $GITHUB_OUTPUT
-          echo "release_drafter_tag_url=${{ steps.release_drafter.outputs.html_url }}" >> $GITHUB_OUTPUT
+          echo "release_drafter_tag_url=www.google.com" >> $GITHUB_OUTPUT
           echo "FE changes: ${{ needs.release_drafter.outputs.release_drafter_body }}"
+          echo "FE Tag URL: ${{ needs.release_drafter.outputs.release_drafter_tag_url }}"
           
   test:
     #name: aws
