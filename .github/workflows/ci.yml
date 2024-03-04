@@ -158,23 +158,31 @@ jobs:
     steps:    
       - uses: actions/checkout@v3
 
-      - name: Instakk JQ
-        run: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\ chmod +x /usr/bin/yq
+      # - name: Instakk JQ
+      #   run: wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\ chmod +x /usr/bin/yq
     
-      - name: Install Helmer
-        run: curl -s https://raw.githubusercontent.com/royalsarkis/helmer/main/helmer.sh -o ~/bin/helmer && chmod +x ~/bin/helmer && export PATH=$PATH:~/bin 
+      # - name: Install Helmer
+      #   run: curl -s https://raw.githubusercontent.com/royalsarkis/helmer/main/helmer.sh -o ~/bin/helmer && chmod +x ~/bin/helmer && export PATH=$PATH:~/bin 
 
-      - name: echo hello
-        run: echo "BRANCH_SUFFIX=-master" >> $GITHUB_ENV
-        shell: bash
+      # - name: echo hello
+      #   run: echo "BRANCH_SUFFIX=-master" >> $GITHUB_ENV
+      #   shell: bash
 
-      - name: TEST
+      # - name: TEST
+      #   run: |
+      #     echo BRANCH_SUFFIX: ${{ env.BRANCH_SUFFIX }}
+      #     helm_charts_repo=$(echo ${{ env.BRANCH_SUFFIX }} | sed s'/-//'g)
+      #     helm_charts_repo_bla=$helm_charts_repo'-charts'
+      #     echo "XXXX: $helm_charts_repo_bla"
+      #     helmer package
+      
+      - name: Set release drafter variables
+        id: set_release_drafter_vars
         run: |
-          echo BRANCH_SUFFIX: ${{ env.BRANCH_SUFFIX }}
-          helm_charts_repo=$(echo ${{ env.BRANCH_SUFFIX }} | sed s'/-//'g)
-          helm_charts_repo_bla=$helm_charts_repo'-charts'
-          echo "XXXX: $helm_charts_repo_bla"
-          helmer package
+          echo "release_drafter_body<<EOF" >> $GITHUB_OUTPUT
+          echo "## Changes oren zamir test" | sed "s/## Changes//g" | sed "s/* No changes/No changes/g" | sed '/^$/d' | tr -s '[\n]' '|' >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "release_drafter_tag_url=${{ steps.release_drafter.outputs.html_url }}" >> $GITHUB_OUTPUT
           
       # # Helm status
       # - name: Check Helm Status
