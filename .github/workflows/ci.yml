@@ -134,7 +134,7 @@ jobs:
       - name: Create JSON file
         run: |
           #echo '{"release_drafter_tag_url": "https://github.com", "release_drafter_body": "- Cycle91 @dekel-upstream (#3897) - remove navigate from Auth0Provider @tomerl-upstream (#3896) - Ariel c4 16936 update recharts package @ariel-upstream (#3873)", "fe_version": "v2.91.0"}' > data.json
-          echo '{"name": "oren", "release_drafter_body": "- Cycle91 @dekel-upstream #3897 - remove navigate from Auth0Provider @tomerl-upstream #3896 - Ariel c4 16936 update recharts package @ariel-upstream #3873"}' > data.json
+          echo '{"name": "oren", "release_drafter_body": "- Cycle91 @dekel-upstream 3897 - remove navigate from Auth0Provider @tomerl-upstream #3896 - Ariel c4 16936 update recharts package @ariel-upstream #3873"}' > data.json
           
       - name: Set release drafter variables
         id: "set_release_drafter_vars"
