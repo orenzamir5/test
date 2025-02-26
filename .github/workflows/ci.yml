@@ -169,7 +169,7 @@ jobs:
       # Helm status
       - name: get label name
         run: |
-          echo github_event_label_name: "${{ github.event.label.name }}"
+          echo "github_event_label_name: ${{ github.event.label.name }}" >> $GITHUB_OUTPUT
           
       # Upload artifacts to S3 bucket
       # - name: Upload artifacts to S3 bucket
