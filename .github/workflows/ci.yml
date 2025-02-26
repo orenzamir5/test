@@ -188,6 +188,7 @@ jobs:
           else
             echo "No associated PR found for commit $GITHUB_SHA."
           fi
+          exit 1
           if [ -z "$pr_number" ]; then
             echo "Cannot fetch labels because no associated PR number was found."
             exit 1
