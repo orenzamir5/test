@@ -212,7 +212,7 @@ jobs:
               echo "Label is:${{ steps.get_labels.outputs.labels }}"
               echo "docker_tag=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
             fi
-            echo "docker_tag: $docker_tag"
+            echo "docker_tag: ${{docker_tag}}"
 
       # - name: Get Associated PR Number
       #   id: get_pr
