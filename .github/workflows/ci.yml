@@ -169,17 +169,19 @@ jobs:
 
       - name: Get label from PR
         run: |
-          pr_number=${{ github.event.pull_request.number }}
-          echo "Fetching labels for PR #$pr_number"
-          # Use the issues endpoint to fetch labels
-          response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels")
-          # Extract label names using jq and join them with commas
-          labels=$(echo "$response" | jq -r '.[].name' | paste -sd ", " -)
-          if [ -z "$labels" ]; then
-            echo "No labels found on merged PR #$pr_number."
+          echo "Looking for pull requests associated with commit $GITHUB_SHA..."
+          # Call the GitHub API to list PRs linked to this commit.
+          # Note: the Accept header is required for this preview endpoint.
+          pr_json=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/commits/$GITHUB_SHA/pulls")
+          # Extract the first PR's number (if available)
+          pr_number=$(echo "$pr_json" | jq -r '.[0].number')
+          if [ "$pr_number" != "null" ] && [ -n "$pr_number" ]; then
+            echo "Found PR number: $pr_number"
+            echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
           else
-            echo "Labels on merged PR #$pr_number: $labels"
+            echo "No associated PR found for commit $GITHUB_SHA."
           fi
 
       # Helm status
