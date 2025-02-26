@@ -209,12 +209,11 @@ jobs:
       - name: Print label
         id: print_label
         run: |
-            echo "docker_tag=latest" >> $GITHUB_OUTPUT
-            #if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
-            #  echo "Label is:${{ steps.get_labels.outputs.labels }}"
-            #  echo "docker_tag=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
-            #fi
-            echo "docker_tag:${{ steps.print_label.outputs.docker_tag }}"
+            if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
+              echo "Label is:${{ steps.get_labels.outputs.labels }}"
+              echo "labels=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
+            fi
+            echo "Label is:${{ steps.get_labels.outputs.labels }}"
 
       # - name: Get Associated PR Number
       #   id: get_pr
