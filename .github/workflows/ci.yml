@@ -6,7 +6,8 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches:
+      - testss
   #pull_request:
   #  branches: [ "main" ]
 
@@ -168,7 +169,7 @@ jobs:
       - uses: actions/checkout@v3
 
 
-      - name: Get label from PR
+      - name: Get PR label
         run: |
           echo "Looking for pull requests associated with commit $GITHUB_SHA..."
           # Call the GitHub API to list PRs linked to this commit.
@@ -184,10 +185,6 @@ jobs:
           else
             echo "No associated PR found for commit $GITHUB_SHA."
           fi
-
-      # Helm status
-      - name: Print label name
-        run: |
           if [ -z "$PR_NUMBER" ]; then
             echo "Cannot fetch labels because no associated PR number was found."
             exit 1
@@ -203,6 +200,10 @@ jobs:
           else
             echo "Labels on PR #$PR_NUMBER: $labels"
           fi
+
+      # Helm status
+      - name: Print label name
+        run: echo "Labels on PR #$PR_NUMBER: $labels"
           
       # Upload artifacts to S3 bucket
       # - name: Upload artifacts to S3 bucket
