@@ -165,8 +165,9 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     #if: success()
-    # outputs:
-    #   pr_label: ${{ steps.set_label.outputs.pr_label }}
+    #outputs:
+    #  docker_tag: ${{ steps.print_label.outputs.docker_tag }}
+      #pr_label: ${{ steps.set_label.outputs.pr_label }}
     steps:
 #      - with:
 #          node: '19.x'
@@ -206,13 +207,14 @@ jobs:
             echo "labels=$labels" >> $GITHUB_OUTPUT
           fi
       - name: Print label
+        id: print_label
         run: |
             echo "docker_tag=latest" >> $GITHUB_OUTPUT
             if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
               echo "Label is:${{ steps.get_labels.outputs.labels }}"
               echo "docker_tag=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
             fi
-            echo "docker_tag: ${{docker_tag}}"
+            echo "docker_tag: {{ steps.print_label.outputs.docker_tag }}"
 
       # - name: Get Associated PR Number
       #   id: get_pr
