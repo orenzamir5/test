@@ -173,7 +173,7 @@ jobs:
       #- uses: actions/checkout@v3
 
       - name: Get PR Label
-        if: ${{ github.ref_name == 'main' }}
+        #if: ${{ github.ref_name == 'main' }}
         id: get_labels
         run: |
           echo "Looking for pull requests associated with commit $GITHUB_SHA..."
@@ -188,6 +188,7 @@ jobs:
           else
             echo "No associated PR found for commit $GITHUB_SHA."
           fi
+          exit 1
           if [ -z "$pr_number" ]; then
             echo "Cannot fetch labels because no associated PR number was found."
             exit 1
