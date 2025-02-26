@@ -206,7 +206,7 @@ jobs:
           fi
       - name: Print label
         run: |
-            if [ "${{ steps.get_labels.outputs.labels }}" == "rc-version" ]; then
+            if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
               echo "Label is: ${{ steps.get_labels.outputs.labels }}"
 
       # - name: Get Associated PR Number
