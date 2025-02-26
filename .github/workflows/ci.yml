@@ -165,8 +165,8 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     #if: success()
-    #outputs:
-    #  docker_tag: ${{ steps.print_label.outputs.docker_tag }}
+    outputs:
+      docker_tag: ${{ steps.print_label.outputs.docker_tag }}
       #pr_label: ${{ steps.set_label.outputs.pr_label }}
     steps:
 #      - with:
