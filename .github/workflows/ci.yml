@@ -165,9 +165,25 @@ jobs:
 #      - with:
 #          node: '19.x'
       - uses: actions/checkout@v3
-      
+
+
+      - name: Get label from PR
+        run: |
+          pr_number=${{ github.event.pull_request.number }}
+          echo "Fetching labels for PR #$pr_number"
+          # Use the issues endpoint to fetch labels
+          response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels")
+          # Extract label names using jq and join them with commas
+          labels=$(echo "$response" | jq -r '.[].name' | paste -sd ", " -)
+          if [ -z "$labels" ]; then
+            echo "No labels found on merged PR #$pr_number."
+          else
+            echo "Labels on merged PR #$pr_number: $labels"
+          fi
+
       # Helm status
-      - name: print label name
+      - name: Print label name
         run: |
           echo "GitHub Label is: ${{ github.event.pull_request.labels[0].name }}"
           
