@@ -213,7 +213,7 @@ jobs:
               echo "Label is:${{ steps.get_labels.outputs.labels }}"
               echo "labels=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
             fi
-            echo "Label is:${{ steps.get_labels.outputs.labels }}"
+            echo "Label is:${{ steps.print_label.outputs.labels }}"
 
       # - name: Get Associated PR Number
       #   id: get_pr
