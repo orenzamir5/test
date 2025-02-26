@@ -8,9 +8,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  # pull_request:
+  #   branches:
+  #     - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -165,52 +165,89 @@ jobs:
     #     service: [build]
     runs-on: ubuntu-latest
     #if: success()
-    outputs:
-      pr_label: ${{ steps.set_label.outputs.pr_label }}
+    # outputs:
+    #   pr_label: ${{ steps.set_label.outputs.pr_label }}
     steps:
 #      - with:
 #          node: '19.x'
       #- uses: actions/checkout@v3
 
-      - name: Get Associated PR Number
-        id: get_pr
+      - name: Get PR Label
+        if: ${{ github.ref_name == 'main' }}
+        id: get_labels
         run: |
           echo "Looking for pull requests associated with commit $GITHUB_SHA..."
+          # Call the GitHub API to list PRs linked to this commit.
           pr_json=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/commits/$GITHUB_SHA/pulls")
+          # Extract the first PR's number (if available)
           pr_number=$(echo "$pr_json" | jq -r '.[0].number')
           if [ "$pr_number" != "null" ] && [ -n "$pr_number" ]; then
             echo "Found PR number: $pr_number"
-            echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
           else
             echo "No associated PR found for commit $GITHUB_SHA."
+          fi
+          if [ -z "$pr_number" ]; then
+            echo "Cannot fetch labels because no associated PR number was found."
             exit 1
           fi
-
-      - name: Fetch and Set Label
-        id: set_label
-        run: |
-          echo "Fetching labels for PR #$PR_NUMBER..."
+          echo "Fetching labels for PR #$pr_number..."
+          # Call the issues API to get labels (PRs are issues too)
           response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/labels")
-          # Extract the first label's name; modify as needed if you want to handle multiple labels
-          pr_label=$(echo "$response" | jq -r '.[0].name')
-          if [ -z "$pr_label" ] || [ "$pr_label" = "null" ]; then
-            echo "No label found for PR #$PR_NUMBER."
-            pr_label="none"
+            "https://api.github.com/repos/${{ github.repository }}/issues/${pr_number}/labels")
+          # Extract labels name
+          labels=$(echo "$response" | jq -r '.[].name' | paste -sd ", " -)
+          if [ -z "$labels" ]; then
+            echo "No labels found on PR #$pr_number."
           else
-            echo "Found label: $pr_label"
+            echo "Labels on PR #$pr_number: $labels"
+            echo "labels=$labels" >> $GITHUB_OUTPUT
           fi
-          # Set the job output using the new GITHUB_OUTPUT file method.
-          echo "pr_label=$pr_label" >> $GITHUB_OUTPUT
+      - name: Print label
+        run: |
+            if [ "${{ steps.get_labels.outputs.labels }}" == "rc-version" ]; then
+              echo "Label is: ${{ steps.get_labels.outputs.labels }}"
 
-  use-label:
-    needs: fetch-label
-    runs-on: ubuntu-latest
-    steps:
-      - name: Display PR Label from previous job
-        run: echo "The PR label from the previous job is:${{ needs.fetch-label.outputs.pr_label }}"
+      # - name: Get Associated PR Number
+      #   id: get_pr
+      #   run: |
+      #     echo "Looking for pull requests associated with commit $GITHUB_SHA..."
+      #     pr_json=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" \
+      #       -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      #       "https://api.github.com/repos/${{ github.repository }}/commits/$GITHUB_SHA/pulls")
+      #     pr_number=$(echo "$pr_json" | jq -r '.[0].number')
+      #     if [ "$pr_number" != "null" ] && [ -n "$pr_number" ]; then
+      #       echo "Found PR number: $pr_number"
+      #       echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
+      #     else
+      #       echo "No associated PR found for commit $GITHUB_SHA."
+      #       exit 1
+      #     fi
+
+      # - name: Fetch and Set Label
+      #   id: set_label
+      #   run: |
+      #     echo "Fetching labels for PR #$PR_NUMBER..."
+      #     response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      #       "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/labels")
+      #     # Extract the first label's name; modify as needed if you want to handle multiple labels
+      #     pr_label=$(echo "$response" | jq -r '.[0].name')
+      #     if [ -z "$pr_label" ] || [ "$pr_label" = "null" ]; then
+      #       echo "No label found for PR #$PR_NUMBER."
+      #       pr_label="none"
+      #     else
+      #       echo "Found label: $pr_label"
+      #     fi
+      #     # Set the job output using the new GITHUB_OUTPUT file method.
+      #     echo "pr_label=$pr_label" >> $GITHUB_OUTPUT
+
+  # use-label:
+  #   needs: fetch-label
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Display PR Label from previous job
+  #       run: echo "The PR label from the previous job is:${{ needs.fetch-label.outputs.pr_label }}"
           
       # Upload artifacts to S3 bucket
       # - name: Upload artifacts to S3 bucket
