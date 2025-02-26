@@ -176,6 +176,7 @@ jobs:
         #if: ${{ github.ref_name == 'main' }}
         id: get_labels
         run: |
+          exit 1
           echo "Looking for pull requests associated with commit $GITHUB_SHA..."
           # Call the GitHub API to list PRs linked to this commit.
           pr_json=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" \
