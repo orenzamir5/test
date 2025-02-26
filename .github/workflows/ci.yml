@@ -175,6 +175,7 @@ jobs:
       - name: Get PR Label
         #if: ${{ github.ref_name == 'main' }}
         id: get_labels
+        continue-on-error: true
         run: |
           exit 1
           echo "Looking for pull requests associated with commit $GITHUB_SHA..."
