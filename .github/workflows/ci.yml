@@ -13,6 +13,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
 env:
   GITHUB_RUN_NUMBER: "0.1.${{ github.run_number }}"
   AZURE_ARTIFACTS_ORG: "https://dev.azure.com/oz5devops/"
