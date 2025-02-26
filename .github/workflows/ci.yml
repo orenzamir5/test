@@ -8,9 +8,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  #pull_request:
+  #  branches:
+  #    - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -210,7 +210,7 @@ jobs:
             echo "docker_tag=latest" >> $GITHUB_OUTPUT
             if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
               echo "Label is:${{ steps.get_labels.outputs.labels }}"
-              echo "docker_tag=bla" >> $GITHUB_OUTPUT
+              echo "docker_tag=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
             fi
             echo "docker_tag: $docker_tag"
 
