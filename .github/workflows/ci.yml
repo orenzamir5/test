@@ -168,7 +168,7 @@ jobs:
     steps:
 #      - with:
 #          node: '19.x'
-      - uses: actions/checkout@v3
+      #- uses: actions/checkout@v3
 
       - name: Get Associated PR Number
         id: get_pr
@@ -208,7 +208,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display PR Label from previous job
-        run: echo "The PR label from the previous job is: ${{ needs.fetch-label.outputs.pr_label }}"
+        run: echo "The PR label from the previous job is:${{ needs.fetch-label.outputs.pr_label }}"
           
       # Upload artifacts to S3 bucket
       # - name: Upload artifacts to S3 bucket
