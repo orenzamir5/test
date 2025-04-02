@@ -12,5 +12,5 @@ Guidelines:
 **User console password:** <br />
 terragrunt output -json user_passwords
 
-**User access and secret keys: **<br />
+**User access and secret keys:** <br />
 terragrunt output -json user_access_keys
