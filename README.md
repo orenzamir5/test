@@ -1,11 +1,11 @@
 # 🌐 User Management Project
 
-This project simplifies the management of users, groups, and policies across **multi-cloud environments** of Upstream using **Terragrunt**.
+This project simplifies the management of users, groups, and policies across **multi-cloud Upstream environments** using **Terragrunt**.
 
 ## 📌 Features
 
 - Automatically applies IAM policy when new users are created.
-- Supports structured resource management per environment.
+- Supports users, groups, and policies resources management per environment.
 - Outputs user credentials securely via Terragrunt commands.
 
 ## 📁 Project Structure
