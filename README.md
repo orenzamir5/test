@@ -1,16 +1,33 @@
-# Upstream User Management Project <br />
+# 🌐 User Management Project
 
-## This project enables the creation of groups, policies, and users in multi-cloud upstream environments using Terragrunt. <br />
+This project simplifies the management of users, groups, and policies across **multi-cloud environments** of Upstream using **Terragrunt**.
 
-Guidelines:
-1. When you create a new user, the IAM policy named "upstream-iam-user-policy" is automatically added to their profile, providing the required IAM permissions. <br />
+## 📌 Features
 
-2. To create a new resource, you need to add it to the environment folder.  <br />
+- Automatically applies IAM policy when new users are created.
+- Supports structured resource management per environment.
+- Outputs user credentials securely via Terragrunt commands.
 
-3. To obtain the user console password and access/secret keys, you need to execute the following command from the "users" folder: <br />
+## 📁 Project Structure
 
-**User console password:** <br />
+All environment-specific resources (users, groups, and policies) should be added under the appropriate folder inside the `environments/` directory.
+
+## 👥 Creating a New User
+
+When you create a new user:
+- The IAM policy named `upstream-iam-user-policy` is **automatically attached** to the user.
+- This policy grants the necessary IAM permissions to operate within the defined scope.
+
+## 🔐 Retrieving User Credentials
+
+Navigate to the `users/` folder, and run the following commands to retrieve user credentials:
+
+### Console Password
+```bash
 terragrunt output -json user_passwords
+```
 
-**User access and secret keys:** <br />
+### Access and Secret Keys
+```bash
 terragrunt output -json user_access_keys
+```
