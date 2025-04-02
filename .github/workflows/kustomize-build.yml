@@ -1,0 +1,36 @@
+name: Kustomize Build
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+      - orenz-c4-17647-add-linters
+    paths:
+      - '**/overlays/**/*'
+jobs:
+  kustomize-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/kustomize
+          kustomize version
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v27
+
+      - name: Run kustomize build on changed files
+        run: |
+          changed_files = ${{ steps.changed-files.outputs.all_changed_files }} 
+          for file in $changed_files; do
+            overlay=$(dirname "$file")
+            echo "Running kustomize build for $overlay"
+            kustomize build "$overlay" || exit 1
+          done
