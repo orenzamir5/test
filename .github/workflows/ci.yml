@@ -210,6 +210,9 @@ jobs:
         id: print_label
         run: |
             echo "https://github.com/${{ github.repository }}"
+            echo "${{ github.event.head_commit.timestamp }}"
+            echo "${{ github.sha }}"
+            
             # if [ "${{ steps.get_labels.outputs.labels }}" == "orenz-test" ]; then
             #   echo "Label is:${{ steps.get_labels.outputs.labels }}"
             #   echo "labels=0.1.${{ github.run_number }}" >> $GITHUB_OUTPUT
